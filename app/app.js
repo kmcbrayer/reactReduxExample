@@ -36,9 +36,6 @@ import 'file-loader?name=[name].[ext]!./.htaccess';
 
 import configureStore from './configureStore';
 
-// Import i18n messages
-import { translationMessages } from './i18n';
-
 // Import CSS reset and Global Styles
 import './global-styles';
 
@@ -52,7 +49,7 @@ const render = () => {
     ReactDOM.render(
         <Provider store={store}>
             <ConnectedRouter history={history}>
-                <App/>
+                <App />
             </ConnectedRouter>
         </Provider>,
         MOUNT_NODE,
@@ -65,29 +62,29 @@ if (module.hot) {
     // have to be constants at compile-time
     module.hot.accept(['./i18n', 'containers/App'], () => {
         ReactDOM.unmountComponentAtNode(MOUNT_NODE);
-        render(translationMessages);
+        render();
     });
 }
 
 // Chunked polyfill for browsers without Intl support
-if (!window.Intl) {
+if (! window.Intl) {
     (new Promise((resolve) => {
         resolve(import('intl'));
     }))
         .then(() => Promise.all([
             import('intl/locale-data/jsonp/en.js'),
         ]))
-        .then(() => render(translationMessages))
+        .then(() => render())
         .catch((err) => {
             throw err;
         });
 } else {
-    render(translationMessages);
+    render();
 }
 
 // Install ServiceWorker and AppCache in the end since
 // it's not most important operation and if main code fails,
 // we do not want it installed
 if (process.env.NODE_ENV === 'production') {
-    require('offline-plugin/runtime').install(); // eslint-disable-line global-require
+    //require('offline-plugin/runtime').install(); // eslint-disable-line global-require
 }
