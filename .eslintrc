@@ -102,18 +102,30 @@
             "always"
         ],
         "prefer-template": 2,
-        "react/default-props-match-prop-types": [1, {
-            "allowRequiredDefaults": true
-        }],
+        "react/default-props-match-prop-types": [
+            1,
+            {
+                "allowRequiredDefaults": true
+            }
+        ],
         "react/forbid-prop-types": 0,
-        "react/jsx-closing-bracket-location": [1, "after-props"],
+        "react/jsx-closing-bracket-location": [
+            1,
+            "after-props"
+        ],
         "react/jsx-first-prop-new-line": [
             2,
             "multiline"
         ],
         "react/jsx-filename-extension": 0,
-        "react/jsx-indent": ["error", 4],
-        "react/jsx-indent-props": ["error", 4],
+        "react/jsx-indent": [
+            "error",
+            4
+        ],
+        "react/jsx-indent-props": [
+            "error",
+            4
+        ],
         "react/jsx-no-target-blank": 0,
         "react/require-default-props": 0,
         "react/require-extension": 0,
@@ -126,11 +138,14 @@
             }
         ],
         "space-before-blocks": "error",
-        "space-before-function-paren": ["error", {
-            "anonymous": "never",
-            "named": "never",
-            "asyncArrow": "always"
-        }],
+        "space-before-function-paren": [
+            "error",
+            {
+                "anonymous": "never",
+                "named": "never",
+                "asyncArrow": "always"
+            }
+        ],
         "space-in-parens": [
             "error",
             "never"
@@ -143,17 +158,17 @@
             }
         ]
     },
-    overrides: [
+    "overrides": [
         {
-            files: "*.spec.js",
+            "files": "*.spec.js",
             "globals": {
                 "shallow": false,
                 "mount": false,
                 "render": false,
                 "describeIf": false,
-                "takeScreenshot": false,
+                "takeScreenshot": false
             },
-            rules: {
+            "rules": {
                 "no-unused-expressions": "off"
             }
         }
