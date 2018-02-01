@@ -1,7 +1,3 @@
-/**
- * Create the store with dynamic reducers
- */
-
 import { createStore, applyMiddleware, compose } from 'redux';
 import { fromJS } from 'immutable';
 import { routerMiddleware } from 'react-router-redux';
@@ -9,9 +5,6 @@ import createReducer from './reducers';
 
 
 export default function configureStore(initialState = {}, history) {
-    // Create the store with two middlewares
-    // 1. sagaMiddleware: Makes redux-sagas work
-    // 2. routerMiddleware: Syncs the location/URL path to the state
     const middlewares = [
         routerMiddleware(history),
     ];
@@ -42,7 +35,6 @@ export default function configureStore(initialState = {}, history) {
 
     // Extensions
     store.injectedReducers = {}; // Reducer registry
-    store.injectedSagas = {}; // Saga registry
 
     // Make reducers hot reloadable, see http://mxs.is/googmo
     /* istanbul ignore next */
