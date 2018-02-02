@@ -34,7 +34,7 @@ import '!file-loader?name=[name].[ext]!./manifest.json';
 import 'file-loader?name=[name].[ext]!./.htaccess';
 /* eslint-enable import/no-unresolved, import/extensions */
 
-import configureStore from './configureStore';
+import configureStore from './redux/configureStore';
 
 // Import CSS reset and Global Styles
 import './global-styles';

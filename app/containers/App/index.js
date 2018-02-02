@@ -12,16 +12,23 @@
  */
 
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 
 import HomePage from '../HomePage/Loadable';
 import NotFoundPage from '../NotFoundPage/Loadable';
 
 export default function App() {
+    const loggedIn = store.user.id; // isLoggedIn()?
     return (
         <div>
             <Switch>
-                <Route exact path="/" component={HomePage} />
+                <Route exact path="/" render={() => (
+                    loggedIn ? (
+                        <Redirect to="/login" />
+                    ) : (
+                        <HomePage />
+                    )
+                )} />
                 <Route component={NotFoundPage} />
             </Switch>
         </div>
