@@ -113,10 +113,6 @@
             1,
             "after-props"
         ],
-        "react/jsx-first-prop-new-line": [
-            2,
-            "multiline"
-        ],
         "react/jsx-filename-extension": 0,
         "react/jsx-indent": [
             "error",
