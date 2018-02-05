@@ -1,6 +1,7 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import HomePage from '../HomePage/Loadable';
 import LoginPage from '../Login/Loadable';
@@ -25,6 +26,10 @@ class App extends React.PureComponent {
         );
     }
 }
+
+App.propTypes = {
+    isLoggedIn: PropTypes.bool
+};
 
 const mapStateToProps = (state) => ({
     isLoggedIn: state.user.isLoggedIn
