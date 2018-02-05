@@ -1,6 +1,6 @@
-import { combineReducers } from 'redux-immutable';
-import { fromJS } from 'immutable';
+import { combineReducers } from 'redux';
 import { LOCATION_CHANGE } from 'react-router-redux';
+import userReducer from './UserReducer';
 
 /*
  * routeReducer
@@ -11,9 +11,9 @@ import { LOCATION_CHANGE } from 'react-router-redux';
  */
 
 // Initial routing state
-const routeInitialState = fromJS({
+const routeInitialState = {
     location: null,
-});
+};
 
 /**
  * Merge route into the global application state
@@ -22,9 +22,9 @@ function routeReducer(state = routeInitialState, action) {
     switch (action.type) {
         /* istanbul ignore next */
         case LOCATION_CHANGE:
-            return state.merge({
+            return {
                 location: action.payload,
-            });
+            };
         default:
             return state;
     }
@@ -36,6 +36,7 @@ function routeReducer(state = routeInitialState, action) {
 export default function createReducer(injectedReducers) {
     return combineReducers({
         route: routeReducer,
+        user: userReducer,
         ...injectedReducers,
     });
 }
