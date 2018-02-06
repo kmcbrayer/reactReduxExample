@@ -32,7 +32,7 @@ if (dllPlugin) {
             new AddAssetHtmlPlugin({
                 filepath: dllPath,
                 includeSourcemap: false,
-            }),
+            })
         );
     });
 }
