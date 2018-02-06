@@ -1,10 +1,11 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import HomePage from '../HomePage/Loadable';
-import LoginPage from '../Login/Loadable';
+import Login from '../Login/Loadable';
+import SignUp from '../SignUp/Loadable';
 import NotFoundPage from '../NotFoundPage/Loadable';
 
 class App extends React.PureComponent {
@@ -16,10 +17,11 @@ class App extends React.PureComponent {
                         this.props.isLoggedIn ? (
                             <HomePage />
                         ) : (
-                            <LoginPage />
+                            <Login />
                         )
                     )} />
-                    <Route path="/login" component={LoginPage} />
+                    <Route path="/login" component={Login} />
+                    <Route path="/signup" component={SignUp} />
                     <Route component={NotFoundPage} />
                 </Switch>
             </div>
@@ -39,4 +41,4 @@ const mapDispatchToProps = (dispatch) => ({
     // not used yet
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
