@@ -1,7 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-export default class Login extends React.PureComponent {
+class Login extends React.PureComponent {
     constructor(props) {
         super(props);
         this.state = {
@@ -20,3 +21,9 @@ export default class Login extends React.PureComponent {
         );
     }
 }
+
+const mapStateToProps = (state) => ({});
+
+const mapDispatchToProps = (dispatch) => ({});
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Login));

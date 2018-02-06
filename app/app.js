@@ -1,10 +1,3 @@
-/**
- * app.js
- *
- * This is the entry file for the application, only setup and boilerplate
- * code.
- */
-
 // Needed for redux-saga es6 generator support
 import 'babel-polyfill';
 
@@ -12,8 +5,7 @@ import 'babel-polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { ConnectedRouter } from 'react-router-redux';
-import createHistory from 'history/createBrowserHistory';
+import { BrowserRouter } from 'react-router-dom';
 import 'sanitize.css/sanitize.css';
 
 // Import root app
@@ -41,16 +33,15 @@ import './global-styles';
 
 // Create redux store with history
 const initialState = {};
-const history = createHistory();
-const store = configureStore(initialState, history);
+const store = configureStore(initialState);
 const MOUNT_NODE = document.getElementById('app');
 
 const render = () => {
     ReactDOM.render(
         <Provider store={store}>
-            <ConnectedRouter history={history}>
+            <BrowserRouter>
                 <App />
-            </ConnectedRouter>
+            </BrowserRouter>
         </Provider>,
         MOUNT_NODE,
     );
@@ -66,21 +57,8 @@ if (module.hot) {
     });
 }
 
-// Chunked polyfill for browsers without Intl support
-if (! window.Intl) {
-    (new Promise((resolve) => {
-        resolve(import('intl'));
-    }))
-        .then(() => Promise.all([
-            import('intl/locale-data/jsonp/en.js'),
-        ]))
-        .then(() => render())
-        .catch((err) => {
-            throw err;
-        });
-} else {
-    render();
-}
+render();
+
 
 // Install ServiceWorker and AppCache in the end since
 // it's not most important operation and if main code fails,
