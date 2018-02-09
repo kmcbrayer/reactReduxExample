@@ -17,6 +17,13 @@ module.exports = (options) => ({
         path: path.resolve(process.cwd(), 'build'),
         publicPath: '/',
     }, options.output), // Merge with env dependent settings
+    node: { // need this for mongodb/webpack integration
+        net: 'empty',
+        tls: 'empty',
+        dns: 'empty',
+        fs: 'empty',
+        module: 'empty'
+    },
     module: {
         rules: [
             {
