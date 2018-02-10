@@ -1,5 +1,6 @@
 
 const express = require('express');
+const logger = require('../logger');
 
 module.exports = (db) => {
     const router = express.Router();
@@ -16,9 +17,14 @@ module.exports = (db) => {
     });
 
     router.post('/users', (req, res) => {
+        db.collection('users').find({}, { userName: req.body.userName }).toArray((err, result) => {
+            if (err) throw err;
+            // user name already exists
+            if (result.length) res.sendStatus(401);
+        });
         db.collection('users').insertOne(req.body, (err, result) => {
             if (err) throw err;
-            res.json(result);
+            res.json(result.ops[0]);
         });
     });
 
