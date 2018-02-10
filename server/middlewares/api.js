@@ -18,7 +18,7 @@ module.exports = (db) => {
     router.post('/users', (req, res) => {
         db.collection('users').insertOne(req.body, (err, result) => {
             if (err) throw err;
-            res.sendStatus(200);
+            res.json(result);
         });
     });
 
