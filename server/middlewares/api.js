@@ -16,6 +16,17 @@ module.exports = (db) => {
         });
     });
 
+    router.post('/users/login', (req, res) => {
+        db.collection('users').find({}, {
+            userName: req.body.userName,
+            password: req.body.password
+        }).toArray((err, result) => {
+            if (err) throw err;
+            res.setHeader('Content-Type', 'application/json');
+            res.json(result[0]);
+        });
+    });
+
     router.post('/users', (req, res) => {
         db.collection('users').find({}, { userName: req.body.userName }).toArray((err, result) => {
             if (err) throw err;

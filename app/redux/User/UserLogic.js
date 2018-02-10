@@ -28,6 +28,33 @@ const userSignUpLogic = createLogic({
     }
 });
 
+const userLoginLogic = createLogic({
+    type: actionTypes.USER_LOGIN_SUBMIT,
+    cancelType: actionTypes.USER_LOGIN_CANCEL,
+    debounce: 500, // ms
+    latest: true,
+
+    process({ action }, dispatch, done) {
+        axios.post('/api/users/login', {
+            userName: action.payload.userName,
+            password: action.payload.password
+        })
+            .then((response) => response.data)
+            .then((userJson) => dispatch({
+                type: actionTypes.USER_LOGIN_SUCCESS,
+                payload: userJson
+            }))
+            .catch((err) => {
+                console.log(err);
+                dispatch({
+                    type: actionTypes.USER_LOGIN_ERROR
+                });
+            })
+            .then(() => done());
+    }
+});
+
 export default [
-    userSignUpLogic
+    userSignUpLogic,
+    userLoginLogic
 ];

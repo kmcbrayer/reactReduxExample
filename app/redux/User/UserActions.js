@@ -8,7 +8,10 @@ export const userSignUpSubmit = ({ userName, password }) => ({
     }
 });
 
-export const userSignUpSuccess = (userJson) => ({
-    type: actionTypes.USER_SIGNUP_SUCCESS,
-    payload: userJson
+export const userLoginSubmit = ({ userName, password }) => ({
+    type: actionTypes.USER_LOGIN_SUBMIT,
+    payload: {
+        userName,
+        password
+    }
 });
