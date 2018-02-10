@@ -14,7 +14,7 @@ export default function notesReducer(state = initialState, action) {
         case actionTypes.FETCH_NOTES_SUCCESS:
             return Object.assign({}, state, {
                 isFetching: false,
-                notes: action.payload.notes
+                list: action.payload.list
             });
         default:
             return state;

@@ -2,6 +2,7 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchNotes } from '../../redux/Notes/NoteActions';
+import NoteList from './components/NoteList';
 
 class NoteDashBoard extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
     constructor(props) {
@@ -16,9 +17,9 @@ class NoteDashBoard extends React.PureComponent { // eslint-disable-line react/p
     }
     render() {
         return (
-            <h1>
-                Home Page
-            </h1>
+            <div>
+                <NoteList notes={this.props.notes} />
+            </div>
         );
     }
 }

@@ -14,7 +14,12 @@ const notesFetchLogic = createLogic({
             .then((notesJson) => dispatch({
                 type: actionTypes.FETCH_NOTES_SUCCESS,
                 payload: {
-                    notes: notesJson
+                    list: notesJson.map((note) => ({
+                        id: note._id,
+                        title: note.title,
+                        body: note.body,
+                        authorId: note.authorId
+                    }))
                 }
             }))
             .catch((err) => {
