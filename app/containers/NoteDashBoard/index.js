@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchNotes } from '../../redux/Notes/NoteActions';
 
-class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+class NoteDashBoard extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
     constructor(props) {
         super(props);
         this.state = {
@@ -34,4 +34,4 @@ const mapDispatchToProps = (dispatch) => ({
     }
 });
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(HomePage));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(NoteDashBoard));

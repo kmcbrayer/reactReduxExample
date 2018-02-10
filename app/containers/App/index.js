@@ -3,7 +3,7 @@ import { Switch, Route, withRouter, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import HomePage from '../HomePage/Loadable';
+import NoteDashBoard from '../NoteDashBoard/Loadable';
 import Login from '../Login/Loadable';
 import SignUp from '../SignUp/Loadable';
 import NotFoundPage from '../NotFoundPage/Loadable';
@@ -15,7 +15,7 @@ class App extends React.PureComponent {
                 <Switch>
                     <Route exact path="/" render={() => (
                         this.props.isLoggedIn ? (
-                            <HomePage />
+                            <NoteDashBoard />
                         ) : (
                             <Redirect to="/login" />
                         )
