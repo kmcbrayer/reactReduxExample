@@ -9,9 +9,11 @@ const userSignUpLogic = createLogic({
     latest: true,
 
     process({ action }, dispatch, done) {
-        console.log('hit logic')
-        axios.post('/api/users')
-            .then((response) => response.data.user)
+        axios.post('/api/users', {
+            userName: action.payload.userName,
+            password: action.payload.password
+        })
+            .then((response) => response.data)
             .then((userJson) => dispatch({
                 type: actionTypes.USER_SIGNUP_SUCCESS,
                 payload: userJson
