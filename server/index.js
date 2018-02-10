@@ -19,8 +19,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const customHost = argv.host || process.env.HOST;
 const host = customHost || null; // Let http.Server use its default IPv6/4 host
 
-let db;
-
 // Connect to the database before starting the application server.
 mongodb.MongoClient.connect(process.env.MONGODB_URI, (err, database) => {
     if (err) {
@@ -29,7 +27,7 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI, (err, database) => {
     }
 
     // Save database object from the callback for reuse.
-    db = database.db('heroku_vp8bg0bc');
+    const db = database.db('heroku_vp8bg0bc');
     logger.out('Database connection ready');
 
     setup(app, db, {
