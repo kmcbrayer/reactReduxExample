@@ -18,7 +18,7 @@ module.exports = (db) => {
     });
 
     router.post('/users/login', (req, res) => {
-        db.collection('users').findOne({}, {
+        db.collection('users').find({
             userName: req.body.userName,
             password: req.body.password
         }).toArray((err, result) => {
