@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { Link, withRouter, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import SignUpForm from './components/SignUpForm';
 import { userSignUpSubmit } from '../../redux/User/UserActions';
@@ -34,21 +34,27 @@ class SignUp extends React.PureComponent {
 
     render() {
         return (
-            <div>
-                <h1>
-                    Sign Up
-                </h1>
-                <SignUpForm
-                    passwordInputHandler={this.handlePasswordInputKeyUp}
-                    userNameInputHandler={this.handleUserNameInputKeyUp}
-                    formSubmitHandler={this.formSubmitHandler} />
-                <Link to="/login">Log In</Link>
-            </div>
+            ! this.props.isLoggedIn ? (
+                <div>
+                    <h1>
+                        Sign Up
+                    </h1>
+                    <SignUpForm
+                        passwordInputHandler={this.handlePasswordInputKeyUp}
+                        userNameInputHandler={this.handleUserNameInputKeyUp}
+                        formSubmitHandler={this.formSubmitHandler} />
+                    <Link to="/login">Log In</Link>
+                </div>
+            ) : (
+                <Redirect to="/" />
+            )
         );
     }
 }
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({
+    isLoggedIn: state.user.isLoggedIn
+});
 
 const mapDispatchToProps = (dispatch) => ({
     submitSignUp: ({ userName, password }) => {
