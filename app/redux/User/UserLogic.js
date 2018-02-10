@@ -21,7 +21,10 @@ const userSignUpLogic = createLogic({
             .catch((err) => {
                 console.log(err);
                 dispatch({
-                    type: actionTypes.USER_SIGNUP_ERROR
+                    type: actionTypes.USER_SIGNUP_ERROR,
+                    payload: {
+                        errorMessage: 'The user name already exists'
+                    }
                 });
             })
             .then(() => done());
@@ -47,7 +50,10 @@ const userLoginLogic = createLogic({
             .catch((err) => {
                 console.log(err);
                 dispatch({
-                    type: actionTypes.USER_LOGIN_ERROR
+                    type: actionTypes.USER_LOGIN_ERROR,
+                    payload: {
+                        errorMessage: 'Username and password combination did not match'
+                    }
                 });
             })
             .then(() => done());

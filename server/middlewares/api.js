@@ -12,7 +12,6 @@ module.exports = (db) => {
     // just for personal testing
     router.get('/users', (req, res) => {
         db.collection('users').find({}).toArray((err, result) => {
-            res.setHeader('Content-Type', 'application/json');
             res.json(result);
         });
     });
@@ -26,7 +25,7 @@ module.exports = (db) => {
                 logger.error(err);
                 res.sendStatus(401);
             }
-            res.setHeader('Content-Type', 'application/json');
+            if (! result[0]) res.sendStatus(401);
             res.json(result[0]);
         });
     });
@@ -35,7 +34,7 @@ module.exports = (db) => {
         db.collection('users').find({ userName: req.body.userName }).toArray((err, result) => {
             if (err) {
                 logger.error(err);
-                res.sendStatus(401);
+                res.sendStatus(400);
             }
             // user name already exists
             if (result.length) {
@@ -45,7 +44,7 @@ module.exports = (db) => {
                 db.collection('users').insertOne(req.body, (_err, _result) => {
                     if (_err) {
                         logger.error(_err);
-                        res.sendStatus(401);
+                        res.sendStatus(400);
                     }
                     res.json(_result.ops[0]);
                 });

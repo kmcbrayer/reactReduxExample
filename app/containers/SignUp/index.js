@@ -39,6 +39,9 @@ class SignUp extends React.PureComponent {
                     <h1>
                         Sign Up
                     </h1>
+                    {this.props.userRequestErrorMessage ? (
+                        <div>{this.props.userRequestErrorMessage}</div>
+                    ) : null }
                     <SignUpForm
                         passwordInputHandler={this.handlePasswordInputKeyUp}
                         userNameInputHandler={this.handleUserNameInputKeyUp}
@@ -53,7 +56,8 @@ class SignUp extends React.PureComponent {
 }
 
 const mapStateToProps = (state) => ({
-    isLoggedIn: state.user.isLoggedIn
+    isLoggedIn: state.user.isLoggedIn,
+    userRequestErrorMessage: state.user.errorMessage
 });
 
 const mapDispatchToProps = (dispatch) => ({

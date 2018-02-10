@@ -4,7 +4,8 @@ const initialUserState = {
     id: 0,
     isLoggedIn: false,
     isLoggingIn: false,
-    userName: null
+    userName: null,
+    errorMessage: null
 };
 
 export default function userReducer(state = initialUserState, action) {
@@ -19,6 +20,14 @@ export default function userReducer(state = initialUserState, action) {
                 isLoggingIn: false,
                 id: action.payload._id,
                 userName: action.payload.userName
+            });
+        case actionTypes.USER_LOGIN_ERROR:
+            return Object.assign({}, state, {
+                isLoggedIn: false,
+                isLoggingIn: false,
+                id: 0,
+                userName: null,
+                errorMessage: action.payload.errorMessage
             });
         case actionTypes.USER_SIGNUP_SUBMIT:
             return Object.assign({}, state, {
@@ -36,7 +45,8 @@ export default function userReducer(state = initialUserState, action) {
                 isLoggedIn: false,
                 isLoggingIn: false,
                 id: 0,
-                userName: null
+                userName: null,
+                errorMessage: action.payload.errorMessage
             });
         default:
             return state;
