@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import { LOCATION_CHANGE } from 'react-router-redux';
-import userReducer from './UserReducer';
+import userReducer from './User/UserReducer';
 
 /*
  * routeReducer
