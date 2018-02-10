@@ -1,6 +1,11 @@
 /* eslint-disable global-require */
-module.exports = (app, options) => {
+
+const api = require('./api');
+
+module.exports = (app, db, options) => {
     const isProd = process.env.NODE_ENV === 'production';
+
+    app.use('/api', api(db));
 
     if (isProd) {
         const addProdMiddlewares = require('./addProdMiddlewares');
