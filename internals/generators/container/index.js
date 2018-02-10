@@ -140,31 +140,6 @@ module.exports = {
       });
     }
 
-    // Sagas
-    if (data.wantSaga) {
-      actions.push({
-        type: 'add',
-        path: '../../app/containers/{{properCase name}}/saga.js',
-        templateFile: './container/saga.js.hbs',
-        abortOnFail: true,
-      });
-      actions.push({
-        type: 'add',
-        path: '../../app/containers/{{properCase name}}/tests/saga.test.js',
-        templateFile: './container/saga.test.js.hbs',
-        abortOnFail: true,
-      });
-    }
-
-    if (data.wantLoadable) {
-      actions.push({
-        type: 'add',
-        path: '../../app/containers/{{properCase name}}/Loadable.js',
-        templateFile: './component/loadable.js.hbs',
-        abortOnFail: true,
-      });
-    }
-
     return actions;
   },
 };
