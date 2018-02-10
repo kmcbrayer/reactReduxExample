@@ -1,7 +1,10 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import { routerMiddleware } from 'react-router-redux';
-import createReducer from './reducers';
 import { createLogicMiddleware } from 'redux-logic';
+import { persistStore, persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage'
+
+import createReducer from './reducers';
 import rootLogic from './rootLogic';
 
 
@@ -31,11 +34,19 @@ export default function configureStore(initialState = {}, history) {
             : compose;
     /* eslint-enable */
 
+    const persistConfig = {
+        key: 'reduxStore',
+        storage
+    };
+
+    const persistedReducer = persistReducer(persistConfig, createReducer());
+
     const store = createStore(
-        createReducer(),
-        initialState,
+        persistedReducer,
         composeEnhancers(...enhancers),
     );
+
+    const persistor = persistStore(store);
 
     // Make reducers hot reloadable, see http://mxs.is/googmo
     /* istanbul ignore next */
@@ -45,5 +56,8 @@ export default function configureStore(initialState = {}, history) {
         });
     }
 
-    return store;
+    return {
+        store,
+        persistor
+    };
 }

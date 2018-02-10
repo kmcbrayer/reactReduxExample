@@ -7,6 +7,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import 'sanitize.css/sanitize.css';
+import { PersistGate } from 'redux-persist/integration/react'
 
 // Import root app
 import App from 'containers/App';
@@ -32,15 +33,17 @@ import './global-styles';
 
 // Create redux store with history
 const initialState = {};
-const store = configureStore(initialState);
+const { store, persistor } = configureStore(initialState);
 const MOUNT_NODE = document.getElementById('app');
 
 const render = () => {
     ReactDOM.render(
         <Provider store={store}>
-            <BrowserRouter>
-                <App />
-            </BrowserRouter>
+            <PersistGate loading={null} persistor={persistor}>
+                <BrowserRouter>
+                    <App />
+                </BrowserRouter>
+            </PersistGate>
         </Provider>,
         MOUNT_NODE,
     );
