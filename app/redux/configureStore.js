@@ -1,15 +1,20 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import { routerMiddleware } from 'react-router-redux';
 import createReducer from './reducers';
+import { createLogicMiddleware } from 'redux-logic';
+import rootLogic from './rootLogic';
 
 
 export default function configureStore(initialState = {}, history) {
+    const logicMiddleware = createLogicMiddleware(rootLogic);
+
     const middlewares = [
         routerMiddleware(history),
+        logicMiddleware
     ];
 
     const enhancers = [
-        applyMiddleware(...middlewares),
+        applyMiddleware(...middlewares)
     ];
 
     // If Redux DevTools Extension is installed use it, otherwise use Redux compose

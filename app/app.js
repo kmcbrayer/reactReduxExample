@@ -25,7 +25,6 @@ import '!file-loader?name=[name].[ext]!./images/icon-512x512.png';
 import '!file-loader?name=[name].[ext]!./manifest.json';
 import 'file-loader?name=[name].[ext]!./.htaccess';
 /* eslint-enable import/no-unresolved, import/extensions */
-
 import configureStore from './redux/configureStore';
 
 // Import CSS reset and Global Styles

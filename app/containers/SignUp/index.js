@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import SignUpForm from './components/SignUpForm';
+import { userSignUpSubmit } from '../../redux/User/UserActions';
 
 class SignUp extends React.PureComponent {
     constructor(props) {
@@ -50,8 +51,8 @@ class SignUp extends React.PureComponent {
 const mapStateToProps = (state) => ({});
 
 const mapDispatchToProps = (dispatch) => ({
-    submitSignUp: (state) => {
-        //dispatch(actions.submitSignUp(state));
+    submitSignUp: ({ userName, password }) => {
+        dispatch(userSignUpSubmit({ userName, password }));
     }
 });
 
