@@ -52,5 +52,12 @@ module.exports = (db) => {
         });
     });
 
+    // notes endpoints
+    router.get('/notes/:id', (req, res) => {
+        db.collection('notes').find({ authorId: req.params.id }).toArray((err, result) => {
+            res.json(result);
+        });
+    });
+
     return router;
 };

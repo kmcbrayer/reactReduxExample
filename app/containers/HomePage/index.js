@@ -1,6 +1,19 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { fetchNotes } from '../../redux/Notes/NoteActions';
 
-export default class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+    constructor(props) {
+        super(props);
+        this.state = {
+            notes: []
+        };
+    }
+    componentWillMount() {
+        const authorId = this.props.authorId;
+        this.props.fetchNotes({ authorId });
+    }
     render() {
         return (
             <h1>
@@ -9,3 +22,16 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
         );
     }
 }
+
+const mapStateToProps = (state) => ({
+    authorId: state.user.id,
+    notes: state.notes.list,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+    fetchNotes: ({ authorId }) => {
+        dispatch(fetchNotes({ authorId }));
+    }
+});
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(HomePage));
