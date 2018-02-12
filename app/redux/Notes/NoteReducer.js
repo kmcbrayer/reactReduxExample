@@ -2,7 +2,8 @@ import actionTypes from '../ActionConstants';
 
 const initialState = {
     isFetching: false,
-    list: []
+    list: [],
+    selectedNote: undefined
 };
 
 // note = {
@@ -24,6 +25,11 @@ export default function notesReducer(state = initialState, action) {
             return Object.assign({}, state, {
                 isFetching: false,
                 list: action.payload.list
+            });
+        case actionTypes.ADD_BLANK_NOTE_SUCCESS:
+            return Object.assign({}, state, {
+                list: [...state.list, action.payload],
+                selectedNote: action.payload
             });
         default:
             return state;

@@ -59,5 +59,15 @@ module.exports = (db) => {
         });
     });
 
+    router.post('/notes', (req, res) => {
+        db.collection('notes').insertOne(req.body, (err, result) => {
+            if (err) {
+                logger.error(err);
+                res.sendStatus(400);
+            }
+            res.json(result.ops[0]);
+        });
+    });
+
     return router;
 };

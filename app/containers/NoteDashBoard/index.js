@@ -2,13 +2,33 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { fetchNotes } from '../../redux/Notes/NoteActions';
+import { Grid, Cell } from 'styled-css-grid';
+
+import { fetchNotes, addBlankNote } from '../../redux/Notes/NoteActions';
 import NoteList from './components/NoteList';
 import NoteEditor from './components/NoteEditor';
 
-const LeftContainer = styled.div`
+const LeftContainer = Cell.extend`
     margin: 0;
-    max-width: 350px;
+    height: 100vh;
+    border-right: 1px solid LightGreen;
+`;
+
+const RightContainer = Cell.extend`
+    height: 100vh;
+`;
+
+const AddButton = styled.button`
+    background-color: LightGreen;
+    border-radius: 3px;
+    height: 30px;
+    width: 70px;
+    margin: 5px;
+`;
+
+const NoteListHeader = styled.h2`
+    margin: 0;
+    border-top: 1px solid LightGreen;    
 `;
 
 class NoteDashBoard extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
@@ -25,16 +45,26 @@ class NoteDashBoard extends React.PureComponent { // eslint-disable-line react/p
         this.props.fetchNotes({ authorId });
     }
 
+    addNote = () => {
+        const authorId = this.state.authorId
+        this.props.addBlankNote({ authorId });
+    };
+
     render() {
         return (
-            <div>
-                <LeftContainer>
-                    <h2>Notes</h2>
+            <Grid columns={3}>
+                <LeftContainer width={1}>
+                    <AddButton onClick={this.addNote}>
+                        Add
+                    </AddButton>
+                    <NoteListHeader>Notes</NoteListHeader>
                     <NoteList notes={this.props.notes} />
                 </LeftContainer>
                 {/* Search header goes here */}
-                <NoteEditor note={this.props.selectedNote} />
-            </div>
+                <RightContainer width={2}>
+                    <NoteEditor note={this.props.selectedNote} />
+                </RightContainer>
+            </Grid>
         );
     }
 }
@@ -42,12 +72,15 @@ class NoteDashBoard extends React.PureComponent { // eslint-disable-line react/p
 const mapStateToProps = (state) => ({
     authorId: state.user.id,
     notes: state.notes.list,
-    selectedNote: state.notes.list[0]
+    selectedNote: state.notes.selectedNote
 });
 
 const mapDispatchToProps = (dispatch) => ({
     fetchNotes: ({ authorId }) => {
         dispatch(fetchNotes({ authorId }));
+    },
+    addBlankNote: ({ authorId }) => {
+        dispatch(addBlankNote({ authorId }));
     }
 });
 

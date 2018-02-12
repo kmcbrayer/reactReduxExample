@@ -6,3 +6,10 @@ export const fetchNotes = ({ authorId }) => ({
         authorId
     }
 });
+
+export const addBlankNote = ({ authorId }) => ({
+    type: actionTypes.ADD_BLANK_NOTE,
+    payload: {
+        authorId
+    }
+});
