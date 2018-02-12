@@ -46,7 +46,7 @@ class NoteDashBoard extends React.PureComponent { // eslint-disable-line react/p
     }
 
     addNote = () => {
-        const authorId = this.state.authorId
+        const authorId = this.props.authorId;
         this.props.addBlankNote({ authorId });
     };
 
