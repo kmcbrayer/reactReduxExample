@@ -7,20 +7,21 @@ const NoteItem = styled.div`
     padding: .3rem;
 `;
 
-const NoteList = ({ notes }) => {
+const NoteList = ({ notes, noteClick }) => {
     const noteItems = notes.map((note) => (
-        <div key={note.id}>{note.title}</div>
+        <NoteItem key={note.id} onClick={noteClick.bind(this, note)}>{note.title}</NoteItem>
     ));
 
     return (
-        <NoteItem>
+        <div>
             {noteItems}
-        </NoteItem>
+        </div>
     );
 };
 
 NoteList.propTypes = {
     notes: PropTypes.arrayOf(PropTypes.object),
+    noteClick: PropTypes.func
 };
 
 export default NoteList;

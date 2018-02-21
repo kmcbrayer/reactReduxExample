@@ -37,6 +37,13 @@ export default function notesReducer(state = initialState, action) {
                 list: newList,
                 selectedNote: action.payload
             });
+        case actionTypes.SELECT_NOTE:
+            const selectedNote = state.list.find((note) => {
+                return note.id === action.payload.noteId;
+            });
+            return Object.assign({}, state, {
+                selectedNote
+            });
         default:
             return state;
     }

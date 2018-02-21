@@ -20,3 +20,10 @@ export const editNote = ({ note }) => ({
         note
     }
 });
+
+export const selectNote = (noteId) => ({
+    type: actionTypes.SELECT_NOTE,
+    payload: {
+        noteId
+    }
+});
