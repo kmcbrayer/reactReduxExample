@@ -22,7 +22,7 @@ const BodyInput = styled.textarea`
 
 const EditorWrapper = styled.div`
     width: 100%;
-    height: 93vh;
+    height: 93vh; //quick and dirty for now
     padding: 0;
     margin: 0;
 `;
