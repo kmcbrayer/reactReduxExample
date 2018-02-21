@@ -16,7 +16,7 @@ const BodyInput = styled.textarea`
     resize: none;
     font-size: 1.3rem;
     outline: none;
-    padding: 0;
+    padding: 1em 0 0 0;
     margin: 0;
 `;
 
