@@ -1,10 +1,11 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Grid, Cell } from 'styled-css-grid';
 
-import { fetchNotes, addBlankNote } from '../../redux/Notes/NoteActions';
+import { fetchNotes, addBlankNote, editNote } from '../../redux/Notes/NoteActions';
 import NoteList from './components/NoteList';
 import NoteEditor from './components/NoteEditor';
 
@@ -50,6 +51,10 @@ class NoteDashBoard extends React.PureComponent { // eslint-disable-line react/p
         this.props.addBlankNote({ authorId });
     };
 
+    editNote = (note) => {
+        this.props.editNote({ note });
+    };
+
     render() {
         return (
             <Grid columns={3}>
@@ -62,7 +67,9 @@ class NoteDashBoard extends React.PureComponent { // eslint-disable-line react/p
                 </LeftContainer>
                 {/* Search header goes here */}
                 <RightContainer width={2}>
-                    <NoteEditor note={this.props.selectedNote} />
+                    <NoteEditor
+                        noteChangeHandler={this.editNote}
+                        note={this.props.selectedNote} />
                 </RightContainer>
             </Grid>
         );
@@ -81,7 +88,19 @@ const mapDispatchToProps = (dispatch) => ({
     },
     addBlankNote: ({ authorId }) => {
         dispatch(addBlankNote({ authorId }));
+    },
+    editNote: ({ note }) => {
+        dispatch(editNote({ note }));
     }
 });
+
+NoteDashBoard.propTypes = {
+    authorId: PropTypes.string,
+    notes: PropTypes.arrayOf(PropTypes.object),
+    selectedNote: PropTypes.object,
+    fetchNotes: PropTypes.func,
+    addBlankNote: PropTypes.func,
+    editNote: PropTypes.func,
+};
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(NoteDashBoard));

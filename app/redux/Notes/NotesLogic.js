@@ -29,7 +29,7 @@ const notesFetchLogic = createLogic({
                 dispatch({
                     type: actionTypes.FETCH_NOTES_ERROR,
                     payload: {
-                        errorMessage: 'Username and password combination did not match'
+                        errorMessage: 'Could not fetch notes'
                     }
                 });
             })
@@ -73,7 +73,45 @@ const addBlankNoteLogic = createLogic({
     }
 });
 
+const editNoteLogic = createLogic({
+    type: actionTypes.UPDATE_NOTE,
+    cancelType: actionTypes.UPDATE_NOTE_CANCEL,
+    debounce: 1000, // ms
+    latest: true,
+
+    process({ action }, dispatch, done) {
+        axios.post(`/api/notes/${action.payload.note.id}`, {
+            id: action.payload.note.id,
+            authorId: action.payload.note.authorId,
+            title: action.payload.note.title,
+            body: action.payload.note.body,
+            lastUpdated: Date.now(),
+            dateCreated: action.payload.note.dateCreated
+        })
+            .then((response) => response.data)
+            .then((note) => dispatch({
+                type: actionTypes.UPDATE_NOTE_SUCCESS,
+                payload: {
+                    id: note.id,
+                    title: note.title,
+                    body: note.body,
+                    authorId: note.authorId,
+                    lastUpdated: note.lastUpdated,
+                    dateCreated: note.dateCreated
+                }
+            }))
+            .catch((err) => {
+                console.log(err);
+                dispatch({
+                    type: actionTypes.UPDATE_NOTE_ERROR,
+                });
+            })
+            .then(() => done());
+    }
+});
+
 export default [
     notesFetchLogic,
-    addBlankNoteLogic
+    addBlankNoteLogic,
+    editNoteLogic
 ];
