@@ -13,3 +13,10 @@ export const addBlankNote = ({ authorId }) => ({
         authorId
     }
 });
+
+export const editNote = ({ note }) => ({
+    type: actionTypes.UPDATE_NOTE,
+    payload: {
+        note
+    }
+});

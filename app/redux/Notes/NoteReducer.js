@@ -26,6 +26,17 @@ export default function notesReducer(state = initialState, action) {
                 list: [...state.list, action.payload],
                 selectedNote: action.payload
             });
+        case actionTypes.UPDATE_NOTE_SUCCESS:
+            const newList = state.list.map((note) => {
+                if (note.id === action.payload.id) {
+                    return action.payload;
+                }
+                return note;
+            });
+            return Object.assign({}, state, {
+                list: newList,
+                selectedNote: action.payload
+            });
         default:
             return state;
     }
