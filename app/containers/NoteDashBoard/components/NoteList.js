@@ -8,7 +8,7 @@ const NoteItem = styled.div`
 `;
 
 const NoteList = ({ notes, noteClick }) => {
-    const noteItems = notes.map((note) => (
+    const noteItems = notes.sort((a, b) => b.lastUpdated - a.lastUpdated).map((note) => (
         <NoteItem key={note.id} onClick={noteClick.bind(this, note)}>{note.title}</NoteItem>
     ));
 

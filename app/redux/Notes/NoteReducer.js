@@ -19,7 +19,7 @@ export default function notesReducer(state = initialState, action) {
         case actionTypes.FETCH_NOTES_SUCCESS:
             return Object.assign({}, state, {
                 list: action.payload.list,
-                selectedNote: action.payload.list[0]
+                selectedNote: action.payload.list.max((note) => note.lastUpdated)
             });
         case actionTypes.ADD_BLANK_NOTE_SUCCESS:
             return Object.assign({}, state, {
