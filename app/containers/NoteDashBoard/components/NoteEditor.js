@@ -33,6 +33,12 @@ class NoteEditor extends React.PureComponent {
         this.state = this.props.note;
     }
 
+    componentWillReceiveProps(nextProps) {
+        if (this.props.note.id !== nextProps.note.id) {
+            this.setState(nextProps.note);
+        }
+    }
+
     titleChangeKeyUpHandler = (e) => {
         e.preventDefault();
         const title = e.target.value;
