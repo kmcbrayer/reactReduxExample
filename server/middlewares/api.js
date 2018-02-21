@@ -1,6 +1,7 @@
 
 const express = require('express');
 const logger = require('../logger');
+const ObjectId = require('mongodb').ObjectId;
 
 module.exports = (db) => {
     const router = express.Router();
@@ -66,6 +67,22 @@ module.exports = (db) => {
                 res.sendStatus(400);
             }
             res.json(result.ops[0]);
+        });
+    });
+
+    router.post('/notes/:id', (req, res) => {
+        db.collection('notes').updateOne({ _id: ObjectId(req.params.id) }, {
+            $set: {
+                title: req.body.title,
+                body: req.body.body,
+                lastUpdated: req.body.lastUpdated
+            }
+        }, (err, result) => {
+            if (err) {
+                logger.error(err);
+                res.sendStatus(400);
+            }
+            res.json(req.body);
         });
     });
 
