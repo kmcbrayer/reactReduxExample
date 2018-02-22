@@ -2,6 +2,7 @@ import React from 'react';
 import { Switch, Route, withRouter, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { IntlProvider } from 'react-intl';
 
 import NoteDashBoard from '../NoteDashBoard/Loadable';
 import Login from '../Login/Loadable';
@@ -12,18 +13,20 @@ class App extends React.PureComponent {
     render() {
         return (
             <div>
-                <Switch>
-                    <Route exact path="/" render={() => (
-                        this.props.isLoggedIn ? (
-                            <NoteDashBoard />
-                        ) : (
-                            <Redirect to="/login" />
-                        )
-                    )} />
-                    <Route path="/login" component={Login} />
-                    <Route path="/signup" component={SignUp} />
-                    <Route component={NotFoundPage} />
-                </Switch>
+                <IntlProvider locale="en">
+                    <Switch>
+                        <Route exact path="/" render={() => (
+                            this.props.isLoggedIn ? (
+                                <NoteDashBoard />
+                            ) : (
+                                <Redirect to="/login" />
+                            )
+                        )} />
+                        <Route path="/login" component={Login} />
+                        <Route path="/signup" component={SignUp} />
+                        <Route component={NotFoundPage} />
+                    </Switch>
+                </IntlProvider>
             </div>
         );
     }

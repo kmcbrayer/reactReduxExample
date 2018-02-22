@@ -1,15 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
-
-const NoteItem = styled.div`
-    font-size: 1.3rem;
-    padding: .3rem;
-`;
+import NoteListItem from './NoteListItem';
 
 const NoteList = ({ notes, noteClick }) => {
     const noteItems = notes.sort((a, b) => b.lastUpdated - a.lastUpdated).map((note) => (
-        <NoteItem key={note.id} onClick={noteClick.bind(this, note)}>{note.title}</NoteItem>
+        <NoteListItem key={note.id} note={note} noteClick={noteClick} />
     ));
 
     return (
