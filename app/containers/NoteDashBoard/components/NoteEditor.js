@@ -34,7 +34,8 @@ class NoteEditor extends React.PureComponent {
     }
 
     componentWillReceiveProps(nextProps) {
-        if (this.props.note.id !== nextProps.note.id) {
+        const currentNoteId = this.props.note && this.props.note.id;
+        if (! currentNoteId || currentNoteId !== nextProps.note.id) {
             this.setState(nextProps.note);
         }
     }
@@ -56,7 +57,7 @@ class NoteEditor extends React.PureComponent {
     render() {
         return (
             <div>
-                { this.state.id ? (
+                { this.state && this.state.id ? (
                     <EditorWrapper>
                         <TitleInput
                             type="text"

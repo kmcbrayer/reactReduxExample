@@ -17,9 +17,12 @@ const initialState = {
 export default function notesReducer(state = initialState, action) {
     switch (action.type) {
         case actionTypes.FETCH_NOTES_SUCCESS:
+            const mostRecentlyUpdated = action.payload.list.reduce((a, b) => {
+                return (a.lastUpdated > b.lastUpdated) ? a : b;
+            });
             return Object.assign({}, state, {
                 list: action.payload.list,
-                selectedNote: action.payload.list.max((note) => note.lastUpdated)
+                selectedNote: mostRecentlyUpdated
             });
         case actionTypes.ADD_BLANK_NOTE_SUCCESS:
             return Object.assign({}, state, {
