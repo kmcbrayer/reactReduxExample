@@ -27,3 +27,10 @@ export const selectNote = (noteId) => ({
         noteId
     }
 });
+
+export const deleteNote = (noteId) => ({
+    type: actionTypes.DELETE_NOTE,
+    payload: {
+        noteId
+    }
+});

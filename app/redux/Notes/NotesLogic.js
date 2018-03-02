@@ -80,7 +80,7 @@ const editNoteLogic = createLogic({
     latest: true,
 
     process({ action }, dispatch, done) {
-        axios.post(`/api/notes/${action.payload.note.id}`, {
+        axios.put(`/api/notes/${action.payload.note.id}`, {
             id: action.payload.note.id,
             authorId: action.payload.note.authorId,
             title: action.payload.note.title,
@@ -110,8 +110,30 @@ const editNoteLogic = createLogic({
     }
 });
 
+const deleteNoteLogic = createLogic({
+    type: actionTypes.DELETE_NOTE,
+    cancelType: actionTypes.DELETE_NOTE_CANCEL,
+    debounce: 500, // ms
+    latest: true,
+
+    process({ action }, dispatch, done) {
+        axios.delete(`/api/notes/${action.payload.noteId}`)
+            .then((response) => dispatch({
+                type: actionTypes.DELETE_NOTE_SUCCESS
+            }))
+            .catch((err) => {
+                console.log(err);
+                dispatch({
+                    type: actionTypes.DELETE_NOTE_ERROR,
+                });
+            })
+            .then(() => done());
+    }
+});
+
 export default [
     notesFetchLogic,
     addBlankNoteLogic,
-    editNoteLogic
+    editNoteLogic,
+    deleteNoteLogic
 ];

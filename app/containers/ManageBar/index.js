@@ -2,11 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { Grid, Cell } from 'styled-css-grid';
 
-import { addBlankNote } from '../../redux/Notes/NoteActions';
+import { addBlankNote, deleteNote } from '../../redux/Notes/NoteActions';
 
 
-const AddButton = styled.button`
+const Button = styled.button`
     background-color: LightGreen;
     border-radius: 3px;
     height: 30px;
@@ -14,9 +15,8 @@ const AddButton = styled.button`
     margin: 5px;
 `;
 
-const BarWrapper = styled.div`
+const BarWrapper = Grid.extend`
     border-bottom: 1px solid LightGreen;
-    width: 100vw;
 `;
 
 class ManageBar extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
@@ -32,30 +32,48 @@ class ManageBar extends React.PureComponent { // eslint-disable-line react/prefe
         this.props.addBlankNote({ authorId });
     };
 
+    deleteNote = () => {
+        const selectedNote = this.props.selectedNote;
+        this.props.deleteNote(selectedNote.id);
+    };
+
     render() {
         return (
-            <BarWrapper>
-                <AddButton onClick={this.addNote}>
-                    Add
-                </AddButton>
+            <BarWrapper columns={3}>
+                <Cell width={1}>
+                    <Button onClick={this.addNote}>
+                        Add
+                    </Button>
+                </Cell>
+                <Cell width={2}>
+                    <Button onClick={this.deleteNote}>
+                        Delete
+                    </Button>
+                </Cell>
             </BarWrapper>
         );
     }
 }
 
 const mapStateToProps = (state) => ({
-    authorId: state.user.id
+    authorId: state.user.id,
+    selectedNote: state.notes.selectedNote
 });
 
 const mapDispatchToProps = (dispatch) => ({
     addBlankNote: ({ authorId }) => {
         dispatch(addBlankNote({ authorId }));
     },
+    deleteNote: (noteId) => {
+        dispatch(deleteNote(noteId));
+    }
 });
 
 ManageBar.propTypes = {
     authorId: PropTypes.string,
-    addBlankNote: PropTypes.func
+    addBlankNote: PropTypes.func,
+    selectedNote: PropTypes.object,
+    deleteNote: PropTypes.func
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ManageBar);

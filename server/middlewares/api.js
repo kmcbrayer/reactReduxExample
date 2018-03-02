@@ -70,7 +70,7 @@ module.exports = (db) => {
         });
     });
 
-    router.post('/notes/:id', (req, res) => {
+    router.put('/notes/:id', (req, res) => {
         db.collection('notes').updateOne({ _id: ObjectId(req.params.id) }, {
             $set: {
                 title: req.body.title,
@@ -84,6 +84,11 @@ module.exports = (db) => {
             }
             res.json(req.body);
         });
+    });
+
+    router.delete('/notes/:id', (req, res) => {
+        db.collection('notes').remove({ _id: ObjectId(req.params.id) }, 1);
+        res.sendStatus(200);
     });
 
     return router;

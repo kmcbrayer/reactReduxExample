@@ -47,6 +47,17 @@ export default function notesReducer(state = initialState, action) {
             return Object.assign({}, state, {
                 selectedNote
             });
+        case actionTypes.DELETE_NOTE_SUCCESS:
+            const newListNow = state.list.filter((note) => {
+                return note.id !== state.selectedNote.id;
+            });
+            const mostRecentlyUpdatedNow = newListNow.reduce((a, b) => {
+                return (a.lastUpdated > b.lastUpdated) ? a : b;
+            });
+            return Object.assign({}, state, {
+                list: newListNow,
+                selectedNote: mostRecentlyUpdatedNow
+            });
         default:
             return state;
     }
