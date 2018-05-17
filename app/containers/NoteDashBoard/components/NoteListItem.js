@@ -19,7 +19,7 @@ const NoteItem = styled.div`
         color: darkgray;
     }
     
-    span { //FormattedDate becomes a span
+    span { // FormattedDate becomes a span
         font-size: .8rem;
         margin: 0;
         padding-left: 10px;

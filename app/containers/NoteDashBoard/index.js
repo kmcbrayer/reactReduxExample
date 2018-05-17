@@ -42,7 +42,7 @@ class NoteDashBoard extends React.PureComponent { // eslint-disable-line react/p
         this.props.editNote({ note });
     };
 
-    selectNote = (note, e) => {
+    selectNote = (note) => {
         this.props.selectNote(note.id);
     };
 
