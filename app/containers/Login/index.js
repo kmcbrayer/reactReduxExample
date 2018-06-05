@@ -1,8 +1,16 @@
 import React from 'react';
 import { Link, withRouter, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
+import styled from 'styled-components';
+
 import LoginForm from './components/LoginForm';
 import { userLoginSubmit } from '../../redux/User/UserActions';
+
+const Container = styled.div`
+    background-image: url('login_signup_background.jpg');
+    height: 100vh;
+    width: 100vw;
+`;
 
 class Login extends React.PureComponent {
     constructor(props) {
@@ -35,7 +43,7 @@ class Login extends React.PureComponent {
     render() {
         return (
             ! this.props.isLoggedIn ? ( // no idea if this is the right way to do this
-                <div>
+                <Container>
                     <h1>
                         Login
                     </h1>
@@ -47,7 +55,7 @@ class Login extends React.PureComponent {
                         userNameInputHandler={this.handleUserNameInputKeyUp}
                         formSubmitHandler={this.formSubmitHandler} />
                     <Link to="/signup">Sign Up</Link>
-                </div>
+                </Container>
             ) : (
                 <Redirect to="/" />
             )
