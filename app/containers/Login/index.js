@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, withRouter, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 import LoginForm from './components/LoginForm';
 import { userLoginSubmit } from '../../redux/User/UserActions';
@@ -10,6 +11,10 @@ const Container = styled.div`
     background-image: url('login_signup_background.jpg');
     height: 100vh;
     width: 100vw;
+`;
+
+const Error = styled.h3`
+    color: red;
 `;
 
 class Login extends React.PureComponent {
@@ -42,13 +47,10 @@ class Login extends React.PureComponent {
 
     render() {
         return (
-            ! this.props.isLoggedIn ? ( // no idea if this is the right way to do this
+            ! this.props.isLoggedIn ? (
                 <Container>
-                    <h1>
-                        Login
-                    </h1>
                     {this.props.userRequestErrorMessage ? (
-                        <div>{this.props.userRequestErrorMessage}</div>
+                        <Error>{this.props.userRequestErrorMessage}</Error>
                     ) : null }
                     <LoginForm
                         passwordInputHandler={this.handlePasswordInputKeyUp}
@@ -62,6 +64,12 @@ class Login extends React.PureComponent {
         );
     }
 }
+
+Login.propTypes = {
+    submitLogin: PropTypes.func.isRequired,
+    isLoggedIn: PropTypes.bool.isRequired,
+    userRequestErrorMessage: PropTypes.string,
+};
 
 const mapStateToProps = (state) => ({
     isLoggedIn: state.user.isLoggedIn,
