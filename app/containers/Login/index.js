@@ -7,10 +7,21 @@ import PropTypes from 'prop-types';
 import LoginForm from './components/LoginForm';
 import { userLoginSubmit } from '../../redux/User/UserActions';
 
+
+const Header = styled.h1`
+    
+`;
 const Container = styled.div`
     background-image: url('login_signup_background.jpg');
     height: 100vh;
     width: 100vw;
+    vertical-align: middle;
+    display: table-cell;
+`;
+
+const FormContainer = styled.div`
+    margin: auto;
+    width: 300px;
 `;
 
 const Error = styled.h3`
@@ -49,14 +60,17 @@ class Login extends React.PureComponent {
         return (
             ! this.props.isLoggedIn ? (
                 <Container>
-                    {this.props.userRequestErrorMessage ? (
-                        <Error>{this.props.userRequestErrorMessage}</Error>
-                    ) : null }
-                    <LoginForm
-                        passwordInputHandler={this.handlePasswordInputKeyUp}
-                        userNameInputHandler={this.handleUserNameInputKeyUp}
-                        formSubmitHandler={this.formSubmitHandler} />
-                    <Link to="/signup">Sign Up</Link>
+                    <FormContainer>
+                        <Header>My Notes</Header>
+                        {this.props.userRequestErrorMessage ? (
+                            <Error>{this.props.userRequestErrorMessage}</Error>
+                        ) : null }
+                        <LoginForm
+                            passwordInputHandler={this.handlePasswordInputKeyUp}
+                            userNameInputHandler={this.handleUserNameInputKeyUp}
+                            formSubmitHandler={this.formSubmitHandler} />
+                        <Link to="/signup">Sign Up</Link>
+                    </FormContainer>
                 </Container>
             ) : (
                 <Redirect to="/" />
