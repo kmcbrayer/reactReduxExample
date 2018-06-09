@@ -2,7 +2,6 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 import { Grid, Cell } from 'styled-css-grid';
 
 import { fetchNotes, editNote, selectNote } from '../../redux/Notes/NoteActions';
@@ -20,9 +19,10 @@ const RightContainer = Cell.extend`
     height: 100vh;
 `;
 
-const NoteListHeader = styled.h2`
-    margin: 0;
+const Container = Grid.extend`
+    grid-gap: 0px;
 `;
+
 
 class NoteDashBoard extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
     constructor(props) {
@@ -50,9 +50,8 @@ class NoteDashBoard extends React.PureComponent { // eslint-disable-line react/p
         return (
             <div>
                 <ManageBar />
-                <Grid columns={3}>
+                <Container columns={3}>
                     <LeftContainer width={1}>
-                        <NoteListHeader>Notes</NoteListHeader>
                         <NoteList notes={this.props.notes} noteClick={this.selectNote} />
                     </LeftContainer>
                     {/* Search header goes here */}
@@ -61,7 +60,7 @@ class NoteDashBoard extends React.PureComponent { // eslint-disable-line react/p
                             noteChangeHandler={this.editNote}
                             note={this.props.selectedNote} />
                     </RightContainer>
-                </Grid>
+                </Container>
             </div>
         );
     }

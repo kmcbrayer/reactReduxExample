@@ -8,6 +8,7 @@ const TitleInput = styled.input`
     outline: none;
     padding: 0;
     margin: 0;
+    width: 100%;
 `;
 
 const BodyInput = styled.textarea`
@@ -25,6 +26,7 @@ const EditorWrapper = styled.div`
     height: 93vh; //quick and dirty for now
     padding: 0;
     margin: 0;
+    margin-left: 10px;
 `;
 
 class NoteEditor extends React.PureComponent {
