@@ -21,7 +21,16 @@ const FormContainer = styled.div`
 `;
 
 const Error = styled.h3`
-    color: red;
+    color: darkred;
+    text-align: center;
+`;
+
+const Href = styled(Link)`
+    color: #212121;
+    margin-top: 1rem;
+    display: block;
+    width: 100%;
+    text-align: center;
 `;
 
 class Login extends React.PureComponent {
@@ -64,7 +73,7 @@ class Login extends React.PureComponent {
                             passwordInputHandler={this.handlePasswordInputKeyUp}
                             userNameInputHandler={this.handleUserNameInputKeyUp}
                             formSubmitHandler={this.formSubmitHandler} />
-                        <Link to="/signup">Sign Up</Link>
+                        <Href to="/signup">Create Account</Href>
                     </FormContainer>
                 </Container>
             ) : (
