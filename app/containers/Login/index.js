@@ -1,37 +1,11 @@
 import React from 'react';
-import { Link, withRouter, Redirect } from 'react-router-dom';
+import { withRouter, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
+import { Container, FormContainer, Href, Error } from '../../components/FormComponents';
 import LoginForm from './components/LoginForm';
 import { userLoginSubmit } from '../../redux/User/UserActions';
-
-const Container = styled.div`
-    background-image: url('login_signup_background.jpg');
-    height: 100vh;
-    width: 100vw;
-    vertical-align: middle;
-    display: table-cell;
-`;
-
-const FormContainer = styled.div`
-    margin: auto;
-    width: 300px;
-`;
-
-const Error = styled.h3`
-    color: darkred;
-    text-align: center;
-`;
-
-const Href = styled(Link)`
-    color: #212121;
-    margin-top: 1rem;
-    display: block;
-    width: 100%;
-    text-align: center;
-`;
 
 class Login extends React.PureComponent {
     constructor(props) {

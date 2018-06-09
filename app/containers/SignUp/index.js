@@ -1,8 +1,10 @@
 import React from 'react';
-import { Link, withRouter, Redirect } from 'react-router-dom';
+import { withRouter, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
+
 import SignUpForm from './components/SignUpForm';
 import { userSignUpSubmit } from '../../redux/User/UserActions';
+import { Container, FormContainer, Href, Error } from '../../components/FormComponents';
 
 class SignUp extends React.PureComponent {
     constructor(props) {
@@ -35,19 +37,18 @@ class SignUp extends React.PureComponent {
     render() {
         return (
             ! this.props.isLoggedIn ? (
-                <div>
-                    <h1>
-                        Sign Up
-                    </h1>
-                    {this.props.userRequestErrorMessage ? (
-                        <div>{this.props.userRequestErrorMessage}</div>
-                    ) : null }
-                    <SignUpForm
-                        passwordInputHandler={this.handlePasswordInputKeyUp}
-                        userNameInputHandler={this.handleUserNameInputKeyUp}
-                        formSubmitHandler={this.formSubmitHandler} />
-                    <Link to="/login">Log In</Link>
-                </div>
+                <Container>
+                    <FormContainer>
+                        {this.props.userRequestErrorMessage ? (
+                            <Error>{this.props.userRequestErrorMessage}</Error>
+                        ) : null }
+                        <SignUpForm
+                            passwordInputHandler={this.handlePasswordInputKeyUp}
+                            userNameInputHandler={this.handleUserNameInputKeyUp}
+                            formSubmitHandler={this.formSubmitHandler} />
+                        <Href to="/login">Log In</Href>
+                    </FormContainer>
+                </Container>
             ) : (
                 <Redirect to="/" />
             )
