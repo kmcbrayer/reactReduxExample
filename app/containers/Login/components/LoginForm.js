@@ -1,29 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { Header, Input, Button } from '../../../components/FormComponents';
+
 const LoginForm = ({
     passwordInputHandler,
     userNameInputHandler,
     formSubmitHandler
 }) => (
     <div>
-        <div>
-            <label htmlFor="userNameInput" >User Name:</label>
-            <input
-                name="userNameInput"
-                type="text"
-                onKeyUp={userNameInputHandler}
-                placeholder="kmac" />
-        </div>
-        <div>
-            <label htmlFor="password" >Password:</label>
-            <input
-                name="password"
-                type="password"
-                onKeyUp={passwordInputHandler}
-                placeholder="********" />
-        </div>
-        <button onClick={formSubmitHandler}>Log In</button>
+        <Header>My Notes</Header>
+        <Input
+            name="userNameInput"
+            type="text"
+            onKeyUp={userNameInputHandler}
+            placeholder="User Name" />
+        <Input
+            name="password"
+            type="password"
+            onKeyUp={passwordInputHandler}
+            placeholder="Password" />
+        <Button onClick={formSubmitHandler}>Log In</Button>
     </div>
 );
 

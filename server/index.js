@@ -1,18 +1,21 @@
 /* eslint consistent-return:0 */
 
 const express = require('express');
+const path = require('path');
+
 const logger = require('./logger');
 const mongodb = require('mongodb');
-
 const argv = require('./argv');
 const port = require('./port');
 const setup = require('./middlewares/frontendMiddleware');
 const resolve = require('path').resolve;
-const bodyParser = require("body-parser");
+const bodyParser = require('body-parser');
+
 
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, 'assets')));
 
 
 // get the intended host and port number, use localhost and port 3000 if not provided

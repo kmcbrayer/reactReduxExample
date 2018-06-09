@@ -13,7 +13,7 @@ import ManageBar from '../ManageBar';
 const LeftContainer = Cell.extend`
     margin: 0;
     height: 100vh;
-    border-right: 1px solid LightGreen;
+    border-right: 1px solid #95d212;
 `;
 
 const RightContainer = Cell.extend`
@@ -42,7 +42,7 @@ class NoteDashBoard extends React.PureComponent { // eslint-disable-line react/p
         this.props.editNote({ note });
     };
 
-    selectNote = (note, e) => {
+    selectNote = (note) => {
         this.props.selectNote(note.id);
     };
 

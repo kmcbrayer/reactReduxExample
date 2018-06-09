@@ -1,6 +1,9 @@
 import React from 'react';
-import { Link, withRouter, Redirect } from 'react-router-dom';
+import { withRouter, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+
+import { Container, FormContainer, Href, Error } from '../../components/FormComponents';
 import LoginForm from './components/LoginForm';
 import { userLoginSubmit } from '../../redux/User/UserActions';
 
@@ -34,26 +37,31 @@ class Login extends React.PureComponent {
 
     render() {
         return (
-            ! this.props.isLoggedIn ? ( // no idea if this is the right way to do this
-                <div>
-                    <h1>
-                        Login
-                    </h1>
-                    {this.props.userRequestErrorMessage ? (
-                        <div>{this.props.userRequestErrorMessage}</div>
-                    ) : null }
-                    <LoginForm
-                        passwordInputHandler={this.handlePasswordInputKeyUp}
-                        userNameInputHandler={this.handleUserNameInputKeyUp}
-                        formSubmitHandler={this.formSubmitHandler} />
-                    <Link to="/signup">Sign Up</Link>
-                </div>
+            ! this.props.isLoggedIn ? (
+                <Container>
+                    <FormContainer>
+                        {this.props.userRequestErrorMessage ? (
+                            <Error>{this.props.userRequestErrorMessage}</Error>
+                        ) : null }
+                        <LoginForm
+                            passwordInputHandler={this.handlePasswordInputKeyUp}
+                            userNameInputHandler={this.handleUserNameInputKeyUp}
+                            formSubmitHandler={this.formSubmitHandler} />
+                        <Href to="/signup">Create Account</Href>
+                    </FormContainer>
+                </Container>
             ) : (
                 <Redirect to="/" />
             )
         );
     }
 }
+
+Login.propTypes = {
+    submitLogin: PropTypes.func.isRequired,
+    isLoggedIn: PropTypes.bool.isRequired,
+    userRequestErrorMessage: PropTypes.string,
+};
 
 const mapStateToProps = (state) => ({
     isLoggedIn: state.user.isLoggedIn,
