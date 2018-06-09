@@ -29,6 +29,14 @@ export default function userReducer(state = initialUserState, action) {
                 userName: null,
                 errorMessage: action.payload.errorMessage
             });
+        case actionTypes.USER_LOGOUT:
+            return Object.assign({}, state, {
+                isLoggedIn: false,
+                isLoggingIn: false,
+                id: 0,
+                userName: null,
+                errorMessage: null
+            });
         case actionTypes.USER_SIGNUP_SUBMIT:
             return Object.assign({}, state, {
                 isLoggingIn: true

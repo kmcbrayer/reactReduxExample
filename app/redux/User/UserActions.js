@@ -15,3 +15,7 @@ export const userLoginSubmit = ({ userName, password }) => ({
         password
     }
 });
+
+export const userLogOut = () => ({
+    type: actionTypes.USER_LOGOUT
+});
