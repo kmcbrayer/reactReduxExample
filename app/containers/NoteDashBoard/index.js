@@ -13,7 +13,7 @@ import ManageBar from '../ManageBar';
 const LeftContainer = Cell.extend`
     margin: 0;
     height: 100vh;
-    border-right: 1px solid #95d212;
+    border-right: 1px solid #90efdf;
 `;
 
 const RightContainer = Cell.extend`

@@ -8,7 +8,7 @@ import { addBlankNote, deleteNote } from '../../redux/Notes/NoteActions';
 import { userLogOut } from '../../redux/User/UserActions';
 
 const Button = styled.button`
-    background-color: #95d212;
+    background-color: #90efdf;
     border-radius: 3px;
     height: 30px;
     min-width: 70px;
@@ -17,7 +17,7 @@ const Button = styled.button`
 `;
 
 const BarWrapper = Grid.extend`
-    border-bottom: 1px solid LightGreen;
+    border-bottom: 1px solid #90efdf;
 `;
 
 class ManageBar extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function

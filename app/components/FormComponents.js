@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 export const Container = styled.div`
-    background-image: url('login_signup_background.jpg');
+    background-image: url('login_signup_background_lblue.jpg');
     height: 100vh;
     width: 100vw;
     vertical-align: middle;
