@@ -55,14 +55,8 @@ export const Input = styled.input`
 
 export const Button = styled.button`
     width: 100%;
-    background-color: lightgray;
+    background-color: #f1f1f1;
+    border-radius: 5px;
     padding: 1rem;
     margin-top: 1rem;
 `;
-
-export default {
-    Container,
-    FormContainer,
-    Error,
-    Href
-}
