@@ -7,10 +7,6 @@ import PropTypes from 'prop-types';
 import LoginForm from './components/LoginForm';
 import { userLoginSubmit } from '../../redux/User/UserActions';
 
-
-const Header = styled.h1`
-    
-`;
 const Container = styled.div`
     background-image: url('login_signup_background.jpg');
     height: 100vh;
@@ -61,7 +57,6 @@ class Login extends React.PureComponent {
             ! this.props.isLoggedIn ? (
                 <Container>
                     <FormContainer>
-                        <Header>My Notes</Header>
                         {this.props.userRequestErrorMessage ? (
                             <Error>{this.props.userRequestErrorMessage}</Error>
                         ) : null }
