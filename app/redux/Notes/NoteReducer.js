@@ -2,6 +2,7 @@ import actionTypes from '../ActionConstants';
 
 const initialState = {
     list: [],
+    filteredList: [],
     selectedNote: undefined
 };
 
@@ -14,15 +15,40 @@ const initialState = {
 //     lastUpdated: mongo date?
 // }
 
+const getMostRecentlyUpdated = (noteList) => (
+    noteList.reduce((a, b) => (
+        (a.lastUpdated > b.lastUpdated) ? a : b
+    ))
+);
+
+const setSelectedNote = (list, noteId) => (
+    list.find((note) => {
+        return note.id === noteId;
+    })
+);
+
+const addNote = (list, updatedNote) => (
+    list.map((note) => {
+        if (note.id === updatedNote.id) {
+            return updatedNote;
+        }
+        return note;
+    })
+);
+
+const removeNote = (list, noteToDelete) => (
+    list.filter((note) => {
+        return note.id !== noteToDelete.id;
+    })
+);
+
 export default function notesReducer(state = initialState, action) {
     switch (action.type) {
         case actionTypes.FETCH_NOTES_SUCCESS:
-            const mostRecentlyUpdated = action.payload.list.reduce((a, b) => {
-                return (a.lastUpdated > b.lastUpdated) ? a : b;
-            });
             return Object.assign({}, state, {
                 list: action.payload.list,
-                selectedNote: mostRecentlyUpdated
+                filteredList: action.payload.list,
+                selectedNote: getMostRecentlyUpdated(action.payload.list)
             });
         case actionTypes.ADD_BLANK_NOTE_SUCCESS:
             return Object.assign({}, state, {
@@ -30,33 +56,19 @@ export default function notesReducer(state = initialState, action) {
                 selectedNote: action.payload
             });
         case actionTypes.UPDATE_NOTE_SUCCESS:
-            const newList = state.list.map((note) => {
-                if (note.id === action.payload.id) {
-                    return action.payload;
-                }
-                return note;
-            });
             return Object.assign({}, state, {
-                list: newList,
+                list: addNote(state.list, action.payload),
                 selectedNote: action.payload
             });
         case actionTypes.SELECT_NOTE:
-            const selectedNote = state.list.find((note) => {
-                return note.id === action.payload.noteId;
-            });
             return Object.assign({}, state, {
-                selectedNote
+                selectedNote: setSelectedNote(state.list, action.payload.noteId)
             });
         case actionTypes.DELETE_NOTE_SUCCESS:
-            const newListNow = state.list.filter((note) => {
-                return note.id !== state.selectedNote.id;
-            });
-            const mostRecentlyUpdatedNow = newListNow.reduce((a, b) => {
-                return (a.lastUpdated > b.lastUpdated) ? a : b;
-            });
+            const updatedList = removeNote(state.list, action.payload);
             return Object.assign({}, state, {
-                list: newListNow,
-                selectedNote: mostRecentlyUpdatedNow
+                list: updatedList,
+                selectedNote: getMostRecentlyUpdated(updatedList)
             });
         default:
             return state;
