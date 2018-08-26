@@ -22,9 +22,9 @@ const getMostRecentlyUpdated = (noteList) => (
 );
 
 const setSelectedNote = (list, noteId) => (
-    list.find((note) => {
-        return note.id === noteId;
-    })
+    list.find((note) => (
+        note.id === noteId
+    ))
 );
 
 const addNote = (list, updatedNote) => (
@@ -37,9 +37,9 @@ const addNote = (list, updatedNote) => (
 );
 
 const removeNote = (list, noteToDelete) => (
-    list.filter((note) => {
-        return note.id !== noteToDelete.id;
-    })
+    list.filter((note) => (
+        note.id !== noteToDelete.id
+    ))
 );
 
 export default function notesReducer(state = initialState, action) {
