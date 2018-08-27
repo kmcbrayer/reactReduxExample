@@ -10,19 +10,6 @@ const Search = styled.input`
 `;
 
 class SearchBar extends React.PureComponent {
-    constructor(props) {
-        super(props);
-        this.state = {
-            searchText: ''
-        };
-    }
-
-    setSearchText = (text) => {
-        this.setState = {
-            searchText: text
-        };
-    };
-
     filterNotes = (e) => {
         e.preventDefault();
         const searchText = e.target.value;
@@ -37,8 +24,7 @@ class SearchBar extends React.PureComponent {
 }
 
 SearchBar.propTypes = {
-    searchNotes: PropTypes.func.isRequired,
-    searchText: PropTypes.string
+    searchNotes: PropTypes.func.isRequired
 };
 
 export default SearchBar;
