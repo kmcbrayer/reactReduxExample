@@ -43,26 +43,26 @@ class NoteDashBoard extends React.PureComponent {
             const filteredList = list.filter((note) => (
                 note.title.includes(searchText) || note.body.includes(searchText)
             ));
-            if (filteredList[0]) {
-                this.props.selectNote(filteredList[0].id);
-            }
-            return filteredList;
+            return { filteredList, selectedNote: filteredList[0] };
         }
-        return list;
+        return { filteredList: list };
     };
 
     render() {
+        const { notes, searchText } = this.props;
+        const { filteredList, selectedNote } = this.filterNoteListBySearchText(notes, searchText);
+
         return (
             <div>
                 <ManageBar />
                 <Container columns={3}>
                     <LeftContainer width={1}>
-                        <NoteList notes={this.filterNoteListBySearchText(this.props.notes, this.props.searchText)} noteClick={this.selectNote} />
+                        <NoteList notes={filteredList} noteClick={this.selectNote} />
                     </LeftContainer>
                     <RightContainer width={2}>
                         <NoteEditor
                             noteChangeHandler={this.editNote}
-                            note={this.props.selectedNote} />
+                            note={selectedNote || this.props.selectedNote} />
                     </RightContainer>
                 </Container>
             </div>
