@@ -15,12 +15,12 @@ const Button = styled.button`
     height: 35px;
     width: 35px;
     margin: 5px 5px 5px 0px;
-    font-weight: bold;
     border: none;
 `;
 
 const DeleteButton = styled(Button)`
     background-image: url('trash-can-48.png');
+    float: right;
 `;
 
 const LogOutButton = styled(Button)`
@@ -38,8 +38,7 @@ const BarWrapper = Grid.extend`
     grid-gap: 0px;
 `;
 
-class ManageBar extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
-
+class ManageBar extends React.PureComponent {
     addNote = () => {
         const authorId = this.props.authorId;
         this.props.addBlankNote(authorId);
@@ -66,8 +65,8 @@ class ManageBar extends React.PureComponent { // eslint-disable-line react/prefe
                     <AddButton onClick={this.addNote} />
                 </Cell>
                 <Cell width={2}>
+                    <SearchBar searchText={this.props.searchText} searchNotes={this.searchNotes} />
                     <DeleteButton onClick={this.deleteNote} />
-                    <SearchBar searchNotes={this.searchNotes} />
                     <LogOutButton onClick={this.userLogOut} />
                 </Cell>
             </BarWrapper>
@@ -81,12 +80,14 @@ ManageBar.propTypes = {
     selectedNote: PropTypes.object,
     deleteNote: PropTypes.func,
     userLogOut: PropTypes.func,
-    searchNotes: PropTypes.func
+    searchNotes: PropTypes.func,
+    searchText: PropTypes.string
 };
 
 const mapStateToProps = (state) => ({
     authorId: state.user.id,
-    selectedNote: state.notes.selectedNote
+    selectedNote: state.notes.selectedNote,
+    searchText: state.notes.searchText
 });
 
 const mapDispatchToProps = (dispatch) => ({

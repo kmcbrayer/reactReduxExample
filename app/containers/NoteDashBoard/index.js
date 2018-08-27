@@ -38,22 +38,33 @@ class NoteDashBoard extends React.PureComponent {
         this.props.selectNote(note.id);
     };
 
+    filterNoteListBySearchText = (list, searchText) => {
+        if (searchText !== '') {
+            const filteredList = list.filter((note) => (
+                note.title.includes(searchText) || note.body.includes(searchText)
+            ));
+            if (filteredList[0]) {
+                this.props.selectNote(filteredList[0].id);
+            }
+            return filteredList;
+        }
+        return list;
+    };
+
     render() {
         return (
             <div>
                 <ManageBar />
-                {this.props.notes ?
-                    <Container columns={3}>
-                        <LeftContainer width={1}>
-                            <NoteList notes={this.props.notes} noteClick={this.selectNote} />
-                        </LeftContainer>
-                        <RightContainer width={2}>
-                            <NoteEditor
-                                noteChangeHandler={this.editNote}
-                                note={this.props.selectedNote} />
-                        </RightContainer>
-                    </Container>
-                : null }
+                <Container columns={3}>
+                    <LeftContainer width={1}>
+                        <NoteList notes={this.filterNoteListBySearchText(this.props.notes, this.props.searchText)} noteClick={this.selectNote} />
+                    </LeftContainer>
+                    <RightContainer width={2}>
+                        <NoteEditor
+                            noteChangeHandler={this.editNote}
+                            note={this.props.selectedNote} />
+                    </RightContainer>
+                </Container>
             </div>
         );
     }
@@ -61,7 +72,7 @@ class NoteDashBoard extends React.PureComponent {
 
 const mapStateToProps = (state) => ({
     authorId: state.user.id,
-    notes: state.notes.filteredList,
+    notes: state.notes.list,
     searchText: state.notes.searchText,
     selectedNote: state.notes.selectedNote
 });
@@ -85,6 +96,7 @@ NoteDashBoard.propTypes = {
     fetchNotes: PropTypes.func,
     editNote: PropTypes.func,
     selectNote: PropTypes.func,
+    searchText: PropTypes.string
 };
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(NoteDashBoard));

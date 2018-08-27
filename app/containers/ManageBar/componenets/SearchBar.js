@@ -3,7 +3,10 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 const Search = styled.input`
-      border: 1px solid #90efdf;
+    border: 1px solid #90efdf;
+    border-radius: 3px;
+    height: 35px;
+    margin: 5px;
 `;
 
 class SearchBar extends React.PureComponent {
@@ -23,7 +26,6 @@ class SearchBar extends React.PureComponent {
     filterNotes = (e) => {
         e.preventDefault();
         const searchText = e.target.value;
-        this.setSearchText(searchText);
         this.props.searchNotes(searchText);
     };
 
@@ -35,7 +37,8 @@ class SearchBar extends React.PureComponent {
 }
 
 SearchBar.propTypes = {
-    searchNotes: PropTypes.func.isRequired
+    searchNotes: PropTypes.func.isRequired,
+    searchText: PropTypes.string
 };
 
 export default SearchBar;
