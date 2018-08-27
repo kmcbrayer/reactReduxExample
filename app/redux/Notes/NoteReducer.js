@@ -2,7 +2,7 @@ import actionTypes from '../ActionConstants';
 
 const initialState = {
     list: [],
-    searchText: '',
+    filteredList: [],
     selectedNote: undefined
 };
 
@@ -42,11 +42,18 @@ const removeNote = (list, noteToDelete) => (
     ))
 );
 
+const filterNoteListBySearchText = (list, searchText) => (
+    list.filter((note) => (
+        note.title.includes(searchText) || note.body.includes(searchText)
+    ))
+);
+
 export default function notesReducer(state = initialState, action) {
     switch (action.type) {
         case actionTypes.FETCH_NOTES_SUCCESS:
             return Object.assign({}, state, {
                 list: action.payload.list,
+                filteredList: action.payload.list,
                 selectedNote: getMostRecentlyUpdated(action.payload.list)
             });
         case actionTypes.ADD_BLANK_NOTE_SUCCESS:
@@ -70,8 +77,12 @@ export default function notesReducer(state = initialState, action) {
                 selectedNote: getMostRecentlyUpdated(updatedList)
             });
         case actionTypes.SEARCH_NOTES:
+            const updatedList2 = filterNoteListBySearchText(
+                state.list, action.payload.searchText
+            );
             return Object.assign({}, state, {
-                searchText: action.payload.searchText
+                filteredList: updatedList2,
+                selectedNote: getMostRecentlyUpdated(updatedList2)
             });
         default:
             return state;

@@ -42,16 +42,18 @@ class NoteDashBoard extends React.PureComponent { // eslint-disable-line react/p
         return (
             <div>
                 <ManageBar />
-                <Container columns={3}>
-                    <LeftContainer width={1}>
-                        <NoteList notes={this.props.notes} noteClick={this.selectNote} />
-                    </LeftContainer>
-                    <RightContainer width={2}>
-                        <NoteEditor
-                            noteChangeHandler={this.editNote}
-                            note={this.props.selectedNote} />
-                    </RightContainer>
-                </Container>
+                {this.props.notes ?
+                    <Container columns={3}>
+                        <LeftContainer width={1}>
+                            <NoteList notes={this.props.notes} noteClick={this.selectNote} />
+                        </LeftContainer>
+                        <RightContainer width={2}>
+                            <NoteEditor
+                                noteChangeHandler={this.editNote}
+                                note={this.props.selectedNote} />
+                        </RightContainer>
+                    </Container>
+                : null }
             </div>
         );
     }
@@ -59,7 +61,7 @@ class NoteDashBoard extends React.PureComponent { // eslint-disable-line react/p
 
 const mapStateToProps = (state) => ({
     authorId: state.user.id,
-    notes: state.notes.list,
+    notes: state.notes.filteredList,
     searchText: state.notes.searchText,
     selectedNote: state.notes.selectedNote
 });
