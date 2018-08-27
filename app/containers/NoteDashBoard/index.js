@@ -28,11 +28,15 @@ class NoteDashBoard extends React.PureComponent { // eslint-disable-line react/p
     constructor(props) {
         super(props);
         this.state = {
-            authorId: 0,
             notes: [],
             selectedNote: undefined
         };
     }
+
+    componentWillReceiveProps(nextProps) {
+
+    }
+
     componentWillMount() {
         const authorId = this.props.authorId;
         this.props.fetchNotes({ authorId });
@@ -54,7 +58,6 @@ class NoteDashBoard extends React.PureComponent { // eslint-disable-line react/p
                     <LeftContainer width={1}>
                         <NoteList notes={this.props.notes} noteClick={this.selectNote} />
                     </LeftContainer>
-                    {/* Search header goes here */}
                     <RightContainer width={2}>
                         <NoteEditor
                             noteChangeHandler={this.editNote}
@@ -69,6 +72,7 @@ class NoteDashBoard extends React.PureComponent { // eslint-disable-line react/p
 const mapStateToProps = (state) => ({
     authorId: state.user.id,
     notes: state.notes.list,
+    searchText: state.notes.searchText,
     selectedNote: state.notes.selectedNote
 });
 
@@ -89,7 +93,6 @@ NoteDashBoard.propTypes = {
     notes: PropTypes.arrayOf(PropTypes.object),
     selectedNote: PropTypes.object,
     fetchNotes: PropTypes.func,
-    addBlankNote: PropTypes.func,
     editNote: PropTypes.func,
     selectNote: PropTypes.func,
 };

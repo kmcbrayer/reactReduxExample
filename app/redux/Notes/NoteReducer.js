@@ -2,7 +2,7 @@ import actionTypes from '../ActionConstants';
 
 const initialState = {
     list: [],
-    filteredList: [],
+    searchText: '',
     selectedNote: undefined
 };
 
@@ -47,7 +47,6 @@ export default function notesReducer(state = initialState, action) {
         case actionTypes.FETCH_NOTES_SUCCESS:
             return Object.assign({}, state, {
                 list: action.payload.list,
-                filteredList: action.payload.list,
                 selectedNote: getMostRecentlyUpdated(action.payload.list)
             });
         case actionTypes.ADD_BLANK_NOTE_SUCCESS:
@@ -69,6 +68,10 @@ export default function notesReducer(state = initialState, action) {
             return Object.assign({}, state, {
                 list: updatedList,
                 selectedNote: getMostRecentlyUpdated(updatedList)
+            });
+        case actionTypes.SEARCH_NOTES:
+            return Object.assign({}, state, {
+                searchText: action.payload.searchText
             });
         default:
             return state;

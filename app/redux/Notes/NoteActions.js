@@ -34,3 +34,10 @@ export const deleteNote = (noteId) => ({
         noteId
     }
 });
+
+export const searchNotes = (searchText) => ({
+    type: actionTypes.SEARCH_NOTES,
+    payload: {
+        searchText
+    }
+});

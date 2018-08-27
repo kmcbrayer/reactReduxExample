@@ -4,7 +4,8 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { Grid, Cell } from 'styled-css-grid';
 
-import { addBlankNote, deleteNote } from '../../redux/Notes/NoteActions';
+import SearchBar from './componenets/SearchBar';
+import { addBlankNote, deleteNote, searchNotes } from '../../redux/Notes/NoteActions';
 import { userLogOut } from '../../redux/User/UserActions';
 
 const Button = styled.button`
@@ -34,12 +35,6 @@ const BarWrapper = Grid.extend`
 `;
 
 class ManageBar extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
-    constructor(props) {
-        super(props);
-        this.state = {
-            searchText: ''
-        };
-    }
 
     addNote = () => {
         const authorId = this.props.authorId;
@@ -56,6 +51,10 @@ class ManageBar extends React.PureComponent { // eslint-disable-line react/prefe
         this.history.push('/login');
     };
 
+    searchNotes = (searchText) => {
+        this.props.searchNotes(searchText);
+    };
+
     render() {
         return (
             <BarWrapper columns={3}>
@@ -68,6 +67,7 @@ class ManageBar extends React.PureComponent { // eslint-disable-line react/prefe
                     <DeleteButton onClick={this.deleteNote}>
                         Delete
                     </DeleteButton>
+                    <SearchBar searchNotes={this.searchNotes} />
                     <LogOutButton onClick={this.userLogOut}>
                         Log Out
                     </LogOutButton>
@@ -82,7 +82,8 @@ ManageBar.propTypes = {
     addBlankNote: PropTypes.func,
     selectedNote: PropTypes.object,
     deleteNote: PropTypes.func,
-    userLogOut: PropTypes.func
+    userLogOut: PropTypes.func,
+    searchNotes: PropTypes.func
 };
 
 const mapStateToProps = (state) => ({
@@ -99,6 +100,9 @@ const mapDispatchToProps = (dispatch) => ({
     },
     userLogOut: () => {
         dispatch(userLogOut());
+    },
+    searchNotes: (text) => {
+        dispatch(searchNotes(text));
     }
 });
 
