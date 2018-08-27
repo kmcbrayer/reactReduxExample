@@ -16,7 +16,7 @@ const NoteItem = styled.div`
         margin: 0;
         font-size: 1rem;
         padding-left: 10px;
-        color: darkgray;
+        color: #757575;
     }
     
     span { // FormattedDate becomes a span
@@ -30,11 +30,6 @@ const NoteItem = styled.div`
 const NoteListItem = ({ note, noteClick }) => (
     <NoteItem onClick={noteClick.bind(this, note)}>
         <h5>{note.title}</h5>
-        <FormattedDate
-            value={new Date(note.lastUpdated)}
-            year="numeric"
-            month="long"
-            day="2-digit" />
         <p>{note.body}</p>
     </NoteItem>
 );
