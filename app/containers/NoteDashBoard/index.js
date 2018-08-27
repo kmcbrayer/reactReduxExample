@@ -24,7 +24,7 @@ const Container = Grid.extend`
 `;
 
 
-class NoteDashBoard extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+class NoteDashBoard extends React.PureComponent {
     componentWillMount() {
         const authorId = this.props.authorId;
         this.props.fetchNotes(authorId);
