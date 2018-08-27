@@ -10,22 +10,26 @@ import { userLogOut } from '../../redux/User/UserActions';
 
 const Button = styled.button`
     background-color: #90efdf;
+    background-size: 35px 35px;
     border-radius: 3px;
-    height: 30px;
-    min-width: 70px;
+    height: 35px;
+    width: 35px;
     margin: 5px 5px 5px 0px;
     font-weight: bold;
+    border: none;
 `;
 
 const DeleteButton = styled(Button)`
-    
+    background-image: url('trash-can-48.png');
 `;
 
 const LogOutButton = styled(Button)`
+    background-image: url('user-48.png');
     float: right;
 `;
 
 const AddButton = styled(Button)`
+    background-image: url('plus-50.png');
     float: right;
 `;
 
@@ -59,18 +63,12 @@ class ManageBar extends React.PureComponent { // eslint-disable-line react/prefe
         return (
             <BarWrapper columns={3}>
                 <Cell width={1}>
-                    <AddButton onClick={this.addNote}>
-                        Add
-                    </AddButton>
+                    <AddButton onClick={this.addNote} />
                 </Cell>
                 <Cell width={2}>
-                    <DeleteButton onClick={this.deleteNote}>
-                        Delete
-                    </DeleteButton>
+                    <DeleteButton onClick={this.deleteNote} />
                     <SearchBar searchNotes={this.searchNotes} />
-                    <LogOutButton onClick={this.userLogOut}>
-                        Log Out
-                    </LogOutButton>
+                    <LogOutButton onClick={this.userLogOut} />
                 </Cell>
             </BarWrapper>
         );
