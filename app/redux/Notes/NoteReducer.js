@@ -77,12 +77,12 @@ export default function notesReducer(state = initialState, action) {
                 selectedNote: getMostRecentlyUpdated(updatedList)
             });
         case actionTypes.SEARCH_NOTES:
-            const updatedList2 = filterNoteListBySearchText(
+            const filteredList = filterNoteListBySearchText(
                 state.list, action.payload.searchText
             );
             return Object.assign({}, state, {
-                filteredList: updatedList2,
-                selectedNote: getMostRecentlyUpdated(updatedList2)
+                filteredList,
+                selectedNote: getMostRecentlyUpdated(filteredList)
             });
         default:
             return state;
