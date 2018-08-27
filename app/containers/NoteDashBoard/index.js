@@ -27,11 +27,11 @@ const Container = Grid.extend`
 class NoteDashBoard extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
     componentWillMount() {
         const authorId = this.props.authorId;
-        this.props.fetchNotes({ authorId });
+        this.props.fetchNotes(authorId);
     }
 
     editNote = (note) => {
-        this.props.editNote({ note });
+        this.props.editNote(note);
     };
 
     selectNote = (note) => {
@@ -65,11 +65,11 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    fetchNotes: ({ authorId }) => {
-        dispatch(fetchNotes({ authorId }));
+    fetchNotes: (authorId) => {
+        dispatch(fetchNotes(authorId));
     },
-    editNote: ({ note }) => {
-        dispatch(editNote({ note }));
+    editNote: (note) => {
+        dispatch(editNote(note));
     },
     selectNote: (noteId) => {
         dispatch(selectNote(noteId));

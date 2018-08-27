@@ -38,7 +38,7 @@ class ManageBar extends React.PureComponent { // eslint-disable-line react/prefe
 
     addNote = () => {
         const authorId = this.props.authorId;
-        this.props.addBlankNote({ authorId });
+        this.props.addBlankNote(authorId);
     };
 
     deleteNote = () => {
@@ -92,8 +92,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    addBlankNote: ({ authorId }) => {
-        dispatch(addBlankNote({ authorId }));
+    addBlankNote: (authorId) => {
+        dispatch(addBlankNote(authorId));
     },
     deleteNote: (noteId) => {
         dispatch(deleteNote(noteId));
