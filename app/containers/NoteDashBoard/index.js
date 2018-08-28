@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { withRouter } from 'react-router-dom';
-import styled from 'styled-components';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
@@ -8,23 +7,6 @@ import { fetchNotes, editNote, selectNote } from '../../redux/Notes/NoteActions'
 import NoteList from './components/NoteList';
 import NoteEditor from './components/NoteEditor';
 import ManageBar from '../ManageBar';
-
-const LeftContainer = styled.div`
-    margin: 0;
-    padding: 0;
-    height: 100vh;
-    width: 30vw;
-    border-right: 1px solid #90efdf;
-    float:left
-`;
-
-const RightContainer = styled.div`
-    margin: 0;
-    padding: 0;
-    height: 100vh;
-    width: 70vw;
-    float: left;
-`;
 
 class NoteDashBoard extends React.PureComponent {
     componentWillMount() {
@@ -55,17 +37,13 @@ class NoteDashBoard extends React.PureComponent {
         const { filteredList, selectedNote } = this.filterNoteListBySearchText(notes, searchText);
 
         return (
-            <div>
+            <Fragment>
                 <ManageBar />
-                <LeftContainer>
-                    <NoteList notes={filteredList} noteClick={this.selectNote} />
-                </LeftContainer>
-                <RightContainer>
-                    <NoteEditor
-                        noteChangeHandler={this.editNote}
-                        note={selectedNote || this.props.selectedNote} />
-                </RightContainer>
-            </div>
+                <NoteList notes={filteredList} noteClick={this.selectNote} />
+                <NoteEditor
+                    noteChangeHandler={this.editNote}
+                    note={selectedNote || this.props.selectedNote} />
+            </Fragment>
         );
     }
 }
