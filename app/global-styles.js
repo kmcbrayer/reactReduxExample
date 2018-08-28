@@ -7,14 +7,15 @@ injectGlobal`
         margin:0;
         height: 100%;
         width: 100%;
-    }
-
-    body {
         font-family: 'Open Sans', Helvetica, Arial, sans-serif;
     }
-    
+
     h1, h2, h3 {
         font-family: 'Open Sans Bold', Helvetica, Arial, sans-serif;
+    }
+    
+    input {
+        font-family: 'Open Sans', Helvetica, Arial, sans-serif;
     }
     
     @font-face {
