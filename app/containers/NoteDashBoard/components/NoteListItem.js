@@ -6,6 +6,7 @@ import { FormattedDate } from 'react-intl';
 const NoteItem = styled.div`
     font-size: 1.3rem;
     padding: .3rem;
+    overflow: hidden;
     
     h5 {
         margin: 0;
