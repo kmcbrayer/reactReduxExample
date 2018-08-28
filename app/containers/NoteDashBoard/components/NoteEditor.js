@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -21,12 +21,12 @@ const BodyInput = styled.textarea`
     margin: 0;
 `;
 
-const EditorWrapper = styled.div`
-    width: 100%;
-    height: 93vh; //quick and dirty for now
-    padding: 0;
+const NoteEditorContainer = styled.div`
     margin: 0;
-    margin-left: 10px;
+    padding-left: 10px;
+    height: 93vh;
+    width: 70vw;
+    float: left;
 `;
 
 class NoteEditor extends React.PureComponent {
@@ -58,9 +58,9 @@ class NoteEditor extends React.PureComponent {
 
     render() {
         return (
-            <div>
+            <Fragment>
                 { this.state && this.state.id ? (
-                    <EditorWrapper>
+                    <NoteEditorContainer>
                         <TitleInput
                             type="text"
                             value={this.state.title}
@@ -70,9 +70,9 @@ class NoteEditor extends React.PureComponent {
                             value={this.state.body}
                             onChange={this.bodyChangeKeyUpHandler}
                             onKeyUp={this.bodyChangeKeyUpHandler} />
-                    </EditorWrapper>
+                    </NoteEditorContainer>
                 ) : null }
-            </div>
+            </Fragment>
         );
     }
 }

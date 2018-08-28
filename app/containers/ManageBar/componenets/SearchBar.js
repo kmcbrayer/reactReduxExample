@@ -7,6 +7,12 @@ const Search = styled.input`
     border-radius: 3px;
     height: 35px;
     margin: 5px;
+    padding-left: 5px;
+    
+    ::placeholder {
+        background: url('search-50.png') no-repeat;
+        background-size: 20px 20px;
+    }
 `;
 
 class SearchBar extends React.PureComponent {
@@ -16,9 +22,10 @@ class SearchBar extends React.PureComponent {
         this.props.searchNotes(searchText);
     };
 
+    // placeholder space is to force icon to show
     render() {
         return (
-            <Search onKeyUp={this.filterNotes} />
+            <Search placeholder=" " onKeyUp={this.filterNotes} />
         );
     }
 }

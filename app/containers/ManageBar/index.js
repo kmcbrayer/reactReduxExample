@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { Grid, Cell } from 'styled-css-grid';
 
 import SearchBar from './componenets/SearchBar';
 import { addBlankNote, deleteNote, searchNotes } from '../../redux/Notes/NoteActions';
@@ -30,12 +29,12 @@ const LogOutButton = styled(Button)`
 
 const AddButton = styled(Button)`
     background-image: url('plus-50.png');
-    float: right;
+    float: left;
 `;
 
-const BarWrapper = Grid.extend`
+const BarWrapper = styled.div`
     border-bottom: 1px solid #90efdf;
-    grid-gap: 0px;
+    width: 100vw;
 `;
 
 class ManageBar extends React.PureComponent {
@@ -60,15 +59,11 @@ class ManageBar extends React.PureComponent {
 
     render() {
         return (
-            <BarWrapper columns={3}>
-                <Cell width={1}>
-                    <AddButton onClick={this.addNote} />
-                </Cell>
-                <Cell width={2}>
-                    <SearchBar searchText={this.props.searchText} searchNotes={this.searchNotes} />
-                    <DeleteButton onClick={this.deleteNote} />
-                    <LogOutButton onClick={this.userLogOut} />
-                </Cell>
+            <BarWrapper>
+                <SearchBar searchText={this.props.searchText} searchNotes={this.searchNotes} />
+                <AddButton onClick={this.addNote} />
+                <DeleteButton onClick={this.deleteNote} />
+                <LogOutButton onClick={this.userLogOut} />
             </BarWrapper>
         );
     }

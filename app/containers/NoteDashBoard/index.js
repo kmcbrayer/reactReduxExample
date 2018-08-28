@@ -1,28 +1,12 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Grid, Cell } from 'styled-css-grid';
 
 import { fetchNotes, editNote, selectNote } from '../../redux/Notes/NoteActions';
 import NoteList from './components/NoteList';
 import NoteEditor from './components/NoteEditor';
 import ManageBar from '../ManageBar';
-
-const LeftContainer = Cell.extend`
-    margin: 0;
-    height: 100vh;
-    border-right: 1px solid #90efdf;
-`;
-
-const RightContainer = Cell.extend`
-    height: 100vh;
-`;
-
-const Container = Grid.extend`
-    grid-gap: 0px;
-`;
-
 
 class NoteDashBoard extends React.PureComponent {
     componentWillMount() {
@@ -43,29 +27,23 @@ class NoteDashBoard extends React.PureComponent {
             const filteredList = list.filter((note) => (
                 note.title.includes(searchText) || note.body.includes(searchText)
             ));
-            if (filteredList[0]) {
-                this.props.selectNote(filteredList[0].id);
-            }
-            return filteredList;
+            return { filteredList, selectedNote: filteredList[0] };
         }
-        return list;
+        return { filteredList: list };
     };
 
     render() {
+        const { notes, searchText } = this.props;
+        const { filteredList, selectedNote } = this.filterNoteListBySearchText(notes, searchText);
+
         return (
-            <div>
+            <Fragment>
                 <ManageBar />
-                <Container columns={3}>
-                    <LeftContainer width={1}>
-                        <NoteList notes={this.filterNoteListBySearchText(this.props.notes, this.props.searchText)} noteClick={this.selectNote} />
-                    </LeftContainer>
-                    <RightContainer width={2}>
-                        <NoteEditor
-                            noteChangeHandler={this.editNote}
-                            note={this.props.selectedNote} />
-                    </RightContainer>
-                </Container>
-            </div>
+                <NoteList notes={filteredList} noteClick={this.selectNote} />
+                <NoteEditor
+                    noteChangeHandler={this.editNote}
+                    note={selectedNote || this.props.selectedNote} />
+            </Fragment>
         );
     }
 }
