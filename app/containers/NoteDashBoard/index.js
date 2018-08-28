@@ -26,10 +26,6 @@ const RightContainer = styled.div`
     float: left;
 `;
 
-const Container = styled.div`
-`;
-
-
 class NoteDashBoard extends React.PureComponent {
     componentWillMount() {
         const authorId = this.props.authorId;
@@ -61,16 +57,14 @@ class NoteDashBoard extends React.PureComponent {
         return (
             <div>
                 <ManageBar />
-                <Container>
-                    <LeftContainer>
-                        <NoteList notes={filteredList} noteClick={this.selectNote} />
-                    </LeftContainer>
-                    <RightContainer>
-                        <NoteEditor
-                            noteChangeHandler={this.editNote}
-                            note={selectedNote || this.props.selectedNote} />
-                    </RightContainer>
-                </Container>
+                <LeftContainer>
+                    <NoteList notes={filteredList} noteClick={this.selectNote} />
+                </LeftContainer>
+                <RightContainer>
+                    <NoteEditor
+                        noteChangeHandler={this.editNote}
+                        note={selectedNote || this.props.selectedNote} />
+                </RightContainer>
             </div>
         );
     }
