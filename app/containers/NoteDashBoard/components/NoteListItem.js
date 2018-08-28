@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { FormattedDate } from 'react-intl';
 
 const NoteItem = styled.div`
     font-size: 1.3rem;
@@ -18,14 +17,8 @@ const NoteItem = styled.div`
         font-size: 1rem;
         padding-left: 10px;
         color: #757575;
+        word-wrap: break-spaces;
     }
-    
-    span { // FormattedDate becomes a span
-        font-size: .8rem;
-        margin: 0;
-        padding-left: 10px;
-    }
-    
 `;
 
 const NoteListItem = ({ note, noteClick }) => (
