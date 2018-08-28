@@ -1,26 +1,32 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
+import styled from 'styled-components';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Grid, Cell } from 'styled-css-grid';
 
 import { fetchNotes, editNote, selectNote } from '../../redux/Notes/NoteActions';
 import NoteList from './components/NoteList';
 import NoteEditor from './components/NoteEditor';
 import ManageBar from '../ManageBar';
 
-const LeftContainer = Cell.extend`
+const LeftContainer = styled.div`
     margin: 0;
+    padding: 0;
     height: 100vh;
+    width: 30vw;
     border-right: 1px solid #90efdf;
+    float:left
 `;
 
-const RightContainer = Cell.extend`
+const RightContainer = styled.div`
+    margin: 0;
+    padding: 0;
     height: 100vh;
+    width: 70vw;
+    float: left;
 `;
 
-const Container = Grid.extend`
-    grid-gap: 0px;
+const Container = styled.div`
 `;
 
 
@@ -55,11 +61,11 @@ class NoteDashBoard extends React.PureComponent {
         return (
             <div>
                 <ManageBar />
-                <Container columns={3}>
-                    <LeftContainer width={1}>
+                <Container>
+                    <LeftContainer>
                         <NoteList notes={filteredList} noteClick={this.selectNote} />
                     </LeftContainer>
-                    <RightContainer width={2}>
+                    <RightContainer>
                         <NoteEditor
                             noteChangeHandler={this.editNote}
                             note={selectedNote || this.props.selectedNote} />
